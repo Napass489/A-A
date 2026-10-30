@@ -78,12 +78,17 @@
         .marquee-container { overflow: hidden; white-space: nowrap; width: 100%; position: relative; }
         .smooth-marquee { display: inline-block; animation: smoothScroll 16s linear infinite; padding-left: 100%; will-change: transform; }
         img { image-rendering: auto; filter: contrast(1.02) saturate(1.02); }
+        html, body { min-height: 100%; height: 100%; margin: 0; padding: 0; }
+        #app-container { min-height: 640px; height: 100vh; height: 100dvh; }
+        @media (min-width: 640px) {
+            #app-container { height: 90vh; max-height: 900px; }
+        }
     </style>
 </head>
 <body class="antialiased min-h-screen flex items-center justify-center p-0 sm:p-6 md:p-8 bg-gradient-to-br from-[#FAF8F5] via-[#F3ECE1] to-[#E8DEC8]">
 
     <!-- Phone Simulator Container -->
-    <div id="app-container" class="w-full max-w-[440px] bg-white sm:rounded-[45px] sm:shadow-[0_20px_50px_-12px_rgba(197,160,89,0.28)] sm:border-[10px] sm:border-[#FAF8F5] h-[100dvh] sm:h-[90vh] flex flex-col overflow-hidden relative mx-auto transition-opacity duration-500 sm:ring-1 sm:ring-[#E5DEC9]">
+    <div id="app-container" class="w-full max-w-[440px] bg-white sm:rounded-[45px] sm:shadow-[0_20px_50px_-12px_rgba(197,160,89,0.28)] sm:border-[10px] sm:border-[#FAF8F5] flex flex-col overflow-hidden relative mx-auto transition-opacity duration-500 sm:ring-1 sm:ring-[#E5DEC9]">
 
         <!-- Fake Desktop Phone Notch -->
         <div class="hidden sm:block absolute top-0 left-1/2 -translate-x-1/2 w-36 h-6 bg-[#FAF8F5] rounded-b-3xl z-[60]"></div>
@@ -92,12 +97,12 @@
         <div id="cloud-loader">
             <img id="loader-logo" src="https://i.postimg.cc/NG4Wd3JZ/att-6CKSzcp-D3zgw-JOYw4KLXPqm-IAYN16uo-KSi4Jfc-Cy0OQ.jpg" class="w-24 h-24 rounded-full object-cover shadow-lg border-2 border-[#C5A059] mb-3">
             <h2 id="loader-name" class="mt-2 font-bold text-cherie-accent text-lg tracking-wide">A&A แฟชั่น</h2>
-            <p class="text-xs text-cherie-gray mt-1">กำลังโหลดคอลเลคชั่นสุดหรู...</p>
+            <p class="text-xs text-cherie-gray mt-1">กำลังโหลดเซ็ตอุปกรณ์และสียางสวยๆ...</p>
         </div>
 
         <!-- Screen Header / Welcome Marquee -->
         <div class="flex items-center px-5 pt-3 sm:pt-5 pb-2 text-[11px] text-cherie-accent font-bold select-none bg-cherie-cardBg z-30 relative marquee-container border-b border-cherie-pastel/40">
-            <div class="smooth-marquee" id="marquee-text">✨ ยินดีต้อนรับสู่ A&A แฟชั่น คอลเลคชั่นสุดหรูคัดสรรเพื่อคุณ ✨</div>
+            <div class="smooth-marquee" id="marquee-text">✨ ยินดีต้อนรับสู่ A&A แฟชั่น ศูนย์รวมเซ็ตอุปกรณ์และสียางสวยๆ ครบทุกโทนสี ✨</div>
         </div>
 
         <!-- ================= APP CONTENT INNER ================= -->
@@ -110,17 +115,23 @@
                         <img loading="eager" id="header-logo-img" src="https://i.postimg.cc/NG4Wd3JZ/att-6CKSzcp-D3zgw-JOYw4KLXPqm-IAYN16uo-KSi4Jfc-Cy0OQ.jpg" alt="A&A แฟชั่น" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
                     </div>
                     <div>
-                        <h1 class="text-[17px] font-extrabold text-cherie-dark leading-tight flex items-center gap-1.5">
-                            <span id="shop-title" class="truncate max-w-[145px]">A&A แฟชั่น</span>
+                        <h1 class="text-[16px] font-extrabold text-cherie-dark leading-tight flex items-center gap-1.5">
+                            <span id="shop-title" class="truncate max-w-[135px]">A&A แฟชั่น</span>
                             <span id="shop-status-badge" class="bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full text-[9px] font-black tracking-wider uppercase border border-emerald-200 shadow-sm">OPEN</span>
                         </h1>
-                        <p id="shop-tagline" class="text-[11px] font-medium text-cherie-gray truncate max-w-[170px]">เรียบหรู ดูแพง สไตล์คุณหนู</p>
+                        <p id="shop-tagline" class="text-[11px] font-medium text-cherie-gray truncate max-w-[160px]">เซ็ตอุปกรณ์และสียางครบทุกโทน</p>
                     </div>
                 </div>
-                <button onclick="openContactModal()" class="px-3.5 py-2 rounded-full bg-gradient-to-r from-[#C5A059] to-[#AA8239] text-white text-[11px] font-bold flex items-center gap-1.5 hover:scale-105 active:scale-95 transition-all shadow-md">
-                    <i class="fa-brands fa-line text-sm"></i>
-                    <span>ติดต่อร้าน</span>
-                </button>
+                <div class="flex items-center gap-1.5">
+                    <button onclick="openOrderModal()" class="w-9 h-9 rounded-full bg-cherie-pink border border-cherie-accent/50 flex items-center justify-center relative hover:scale-105 active:scale-95 transition-all shadow-sm">
+                        <i class="fa-solid fa-bag-shopping text-cherie-accent text-sm"></i>
+                        <span id="cart-badge-header" class="absolute -top-1 -right-1 bg-cherie-accent text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center border border-white hidden">0</span>
+                    </button>
+                    <button onclick="openContactModal()" class="px-3 py-2 rounded-full bg-gradient-to-r from-[#C5A059] to-[#AA8239] text-white text-[11px] font-bold flex items-center gap-1 hover:scale-105 active:scale-95 transition-all shadow-md">
+                        <i class="fa-brands fa-line text-sm"></i>
+                        <span>ติดต่อร้าน</span>
+                    </button>
+                </div>
             </header>
 
             <!-- ================= VIEW: HOME ================= -->
@@ -132,41 +143,23 @@
                     <div class="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5 z-20" id="hero-carousel-dots"></div>
                 </div>
 
-                <!-- Contact Channels Quick Bar -->
-                <div class="bg-white rounded-[20px] p-3.5 border border-cherie-pastel/80 shadow-sm space-y-2.5">
-                    <div class="flex items-center justify-between">
-                        <span class="text-[12px] font-extrabold text-cherie-dark flex items-center gap-1.5">
-                            <i class="fa-solid fa-crown text-cherie-accent"></i> ช่องทางการติดต่อสั่งซื้อ
-                        </span>
-                        <span class="text-[10px] text-cherie-gray font-medium">คลิกทักแชทได้เลยค่ะ</span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2.5" id="home-contact-buttons">
-                        <a id="home-line-btn-1" href="https://line.me/ti/p/WQkxdgrbzs" target="_blank" rel="noopener" class="bg-gradient-to-r from-[#06C755] to-[#05a847] text-white rounded-[14px] py-2.5 px-3 flex items-center justify-center gap-2 text-[12px] font-bold shadow-sm hover:opacity-95 active:scale-95 transition-all">
-                            <i class="fa-brands fa-line text-base"></i> LINE ช่องทางที่ 1
-                        </a>
-                        <a id="home-line-btn-2" href="https://line.me/ti/p/HJN4eqHpZm" target="_blank" rel="noopener" class="bg-gradient-to-r from-[#C5A059] to-[#9E7B3B] text-white rounded-[14px] py-2.5 px-3 flex items-center justify-center gap-2 text-[12px] font-bold shadow-sm hover:opacity-95 active:scale-95 transition-all">
-                            <i class="fa-brands fa-line text-base"></i> LINE ช่องทางที่ 2
-                        </a>
-                    </div>
-                </div>
-
                 <!-- Highlights Story -->
                 <div class="space-y-2.5">
                     <h3 class="text-[14px] font-extrabold text-cherie-dark px-1 flex items-center gap-1.5">ไฮไลท์สตอรี่ <span class="text-cherie-accent">✨</span></h3>
                     <div class="flex gap-4 overflow-x-auto no-scrollbar py-1 px-1" id="highlight-scroller"></div>
                 </div>
 
-                <!-- Loyalty Checker -->
+                <!-- Parcel Tracking Checker (เช็คพัสดุ) -->
                 <div class="bg-white rounded-[20px] p-3.5 border border-cherie-pastel/80 shadow-sm space-y-2.5 relative overflow-hidden">
                     <h3 class="text-[13px] font-extrabold text-cherie-dark flex items-center gap-1.5 relative z-10">
-                        <i class="fa-solid fa-gem text-cherie-accent text-[13px]"></i>
-                        เช็คแต้มสะสมลูกค้าคนพิเศษ
+                        <i class="fa-solid fa-truck-fast text-cherie-accent text-[13px]"></i>
+                        เช็คสถานะพัสดุ / เลขพัสดุ
                     </h3>
                     <div class="flex gap-2 relative z-10">
-                        <input type="text" id="customer-check-name" placeholder="พิมพ์ชื่อที่ใช้สะสมแต้ม..." class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[12px] px-3 py-2 text-[12px] text-cherie-dark font-medium focus:outline-none focus:border-cherie-accent">
-                        <button onclick="checkCustomerPoints()" class="bg-cherie-accent text-white font-bold px-4 rounded-[12px] text-[12px] shadow-sm hover:opacity-90 transition-all whitespace-nowrap active:scale-95">เช็คแต้ม</button>
+                        <input type="text" id="parcel-check-name" placeholder="พิมพ์ชื่อที่ใช้สั่งซื้อ หรือ รหัสออเดอร์..." class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[12px] px-3 py-2 text-[12px] text-cherie-dark font-medium focus:outline-none focus:border-cherie-accent">
+                        <button onclick="checkCustomerParcel()" class="bg-cherie-dark text-white font-bold px-4 rounded-[12px] text-[12px] shadow-sm hover:opacity-90 transition-all whitespace-nowrap active:scale-95">เช็คพัสดุ</button>
                     </div>
-                    <div id="customer-points-result" class="hidden bg-cherie-pink rounded-[12px] p-2.5 border border-cherie-pastel text-center text-[12px] font-medium transition-all relative z-10"></div>
+                    <div id="customer-parcel-result" class="hidden bg-cherie-pink rounded-[12px] p-2.5 border border-cherie-pastel text-[12px] font-medium transition-all relative z-10 space-y-1.5"></div>
                 </div>
 
                 <!-- Products Grid -->
@@ -187,7 +180,7 @@
                     <span class="text-[10px] font-bold text-cherie-accent bg-cherie-pink px-3 py-1.5 rounded-full shadow-sm border border-cherie-pastel" id="filtered-count">ทั้งหมด 0 รายการ</span>
                 </div>
                 <div class="relative px-1">
-                    <input type="text" id="search-input" oninput="handleSearch()" placeholder="ค้นหาชุดหรือสินค้าที่ต้องการ..." class="w-full bg-white border border-cherie-pastel rounded-[20px] py-3 pl-11 pr-4 text-[13px] font-medium focus:outline-none focus:border-cherie-accent text-cherie-dark shadow-sm transition-all">
+                    <input type="text" id="search-input" oninput="handleSearch()" placeholder="ค้นหาสียาง ชนิดยาง หรือเซ็ตอุปกรณ์..." class="w-full bg-white border border-cherie-pastel rounded-[20px] py-3 pl-11 pr-4 text-[13px] font-medium focus:outline-none focus:border-cherie-accent text-cherie-dark shadow-sm transition-all">
                     <i class="fa-solid fa-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-cherie-gray"></i>
                 </div>
 
@@ -195,6 +188,31 @@
                 <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1 px-1" id="category-grid-buttons"></div>
 
                 <div class="grid grid-cols-2 gap-3 pt-1" id="categories-products-grid"></div>
+            </div>
+
+            <!-- ================= VIEW: CART (หน้าแท็บตะกร้า) ================= -->
+            <div id="view-cart" class="view-section hidden space-y-5 px-4 pt-5 pb-8">
+                <div class="flex items-center justify-between px-1">
+                    <div>
+                        <h2 class="text-[18px] font-extrabold text-cherie-dark flex items-center gap-2">
+                            <i class="fa-solid fa-bag-shopping text-cherie-accent"></i> ตะกร้าคำสั่งซื้อ
+                        </h2>
+                        <p class="text-[11px] text-cherie-gray">ตรวจสอบรายการสีและชนิดยางที่เลือก</p>
+                    </div>
+                    <span id="cart-tab-count-badge" class="text-[11px] font-bold text-cherie-accent bg-cherie-pink px-3 py-1 rounded-full border border-cherie-pastel">0 ชิ้น</span>
+                </div>
+
+                <div id="cart-tab-items-container" class="space-y-3"></div>
+
+                <div id="cart-tab-summary-box" class="bg-white rounded-[24px] p-5 border border-cherie-pastel shadow-sm space-y-3.5 hidden">
+                    <div class="flex justify-between items-center text-[14px] font-extrabold text-cherie-dark">
+                        <span>รวมค่าสินค้าทั้งหมด:</span>
+                        <span id="cart-tab-subtotal" class="text-cherie-accent text-[18px] font-black">฿0</span>
+                    </div>
+                    <button onclick="openOrderModal()" class="w-full bg-gradient-to-r from-[#C5A059] to-[#9E7B3B] text-white font-extrabold py-3.5 rounded-[16px] text-[13px] shadow-md flex items-center justify-center gap-2 active:scale-95 transition-all">
+                        <i class="fa-solid fa-money-bill-transfer"></i> ดำเนินการสั่งซื้อ / โอนเงิน ✨
+                    </button>
+                </div>
             </div>
 
             <!-- ================= VIEW: REVIEWS (แทนหน้าตะกร้าเดิม) ================= -->
@@ -271,10 +289,10 @@
                         </div>
                         <button onclick="handleAdminLogout()" class="text-[11px] font-bold bg-gray-100 text-gray-600 px-3 py-1.5 rounded-xl hover:bg-red-50 hover:text-red-500 transition-colors shadow-sm">ออกจากระบบ</button>
                     </div>
-
-                    <!-- Admin Sub-navigation (ตัดออเดอร์และรายรับออกตามบรีฟ) -->
+                    <!-- Admin Sub-navigation (เพิ่มแท็บออเดอร์/พัสดุ) -->
                     <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1 px-1">
                         <button onclick="switchAdminSubTab('shop')" id="subtab-shop" class="flex-none py-2 px-3.5 text-[12px] font-bold rounded-[14px] bg-cherie-accent text-white shadow-sm whitespace-nowrap transition-all">ร้าน/ธีม</button>
+                        <button onclick="switchAdminSubTab('orders')" id="subtab-orders" class="flex-none py-2 px-3.5 text-[12px] font-bold rounded-[14px] bg-white text-cherie-gray border border-cherie-pastel shadow-sm whitespace-nowrap transition-all">คำสั่งซื้อ/พัสดุ</button>
                         <button onclick="switchAdminSubTab('products')" id="subtab-products" class="flex-none py-2 px-3.5 text-[12px] font-bold rounded-[14px] bg-white text-cherie-gray border border-cherie-pastel shadow-sm whitespace-nowrap transition-all">สินค้า</button>
                         <button onclick="switchAdminSubTab('promo')" id="subtab-promo" class="flex-none py-2 px-3.5 text-[12px] font-bold rounded-[14px] bg-white text-cherie-gray border border-cherie-pastel shadow-sm whitespace-nowrap transition-all">แบนเนอร์</button>
                         <button onclick="switchAdminSubTab('highlights')" id="subtab-highlights" class="flex-none py-2 px-3.5 text-[12px] font-bold rounded-[14px] bg-white text-cherie-gray border border-cherie-pastel shadow-sm whitespace-nowrap transition-all">ไฮไลท์</button>
@@ -302,6 +320,19 @@
                                 </div>
                                 <div><label class="block text-[11px] text-cherie-gray font-bold mb-1 ml-1">ลิงก์ LINE ช่องทางที่ 1</label><input type="text" id="admin-shop-line1" class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[14px] p-3 text-[13px] font-medium focus:outline-none focus:border-cherie-accent"></div>
                                 <div><label class="block text-[11px] text-cherie-gray font-bold mb-1 ml-1">ลิงก์ LINE ช่องทางที่ 2</label><input type="text" id="admin-shop-line2" class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[14px] p-3 text-[13px] font-medium focus:outline-none focus:border-cherie-accent"></div>
+
+                                <!-- ข้อมูลบัญชีรับโอนเงิน -->
+                                <div class="bg-cherie-appBg/70 p-3 rounded-[16px] border border-cherie-pastel space-y-2.5">
+                                    <label class="block text-[11px] text-cherie-dark font-extrabold flex items-center gap-1.5">
+                                        <i class="fa-solid fa-building-columns text-cherie-accent"></i> ข้อมูลการโอนชำระเงิน (แสดงในหน้าคำสั่งซื้อ)
+                                    </label>
+                                    <input type="text" id="admin-shop-bank-name" placeholder="ชื่อบัญชีธนาคาร (เช่น บจก. A&A แฟชั่น)" class="w-full bg-white border border-cherie-pastel rounded-[12px] p-2.5 text-[12px] font-medium focus:outline-none focus:border-cherie-accent">
+                                    <input type="text" id="admin-shop-bank-acc" placeholder="เลขบัญชีและธนาคาร (เช่น 123-4-56789-0 กสิกรไทย)" class="w-full bg-white border border-cherie-pastel rounded-[12px] p-2.5 text-[12px] font-medium focus:outline-none focus:border-cherie-accent">
+                                    <div>
+                                        <label class="block text-[10px] text-cherie-gray font-bold mb-1">อัปโหลดรูป QR Code รับเงิน (ถ้ามี)</label>
+                                        <input type="file" id="admin-shop-qr-file" accept="image/*" class="w-full bg-white border border-cherie-pastel rounded-[12px] p-1 text-[11px] text-cherie-gray file:mr-2 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-[11px] file:font-bold file:bg-cherie-pink file:text-cherie-accent">
+                                    </div>
+                                </div>
                                 
                                 <!-- อัปโหลดไฟล์เพลง MP3 หรือใส่ URL -->
                                 <div class="bg-cherie-appBg/70 p-3 rounded-[16px] border border-cherie-pastel space-y-2">
@@ -347,7 +378,33 @@
                         </div>
                     </div>
 
-                    <!-- ADMIN: PRODUCTS (เอาช่องเรทและลิงก์ตัวอย่างออกตามบรีฟ) -->
+                    <!-- ADMIN: ORDERS & PARCEL TRACKING -->
+                    <div id="admin-sec-orders" class="admin-sec space-y-4 hidden">
+                        <div class="bg-white rounded-[24px] p-5 border border-cherie-pastel shadow-sm space-y-3.5">
+                            <h3 class="text-[13px] font-extrabold text-cherie-dark border-b border-cherie-pastel pb-2.5 flex items-center gap-2">
+                                <i class="fa-solid fa-truck-fast text-cherie-accent"></i> อัปเดตเลขพัสดุให้ลูกค้า (สำหรับเช็คพัสดุหน้าเว็บ)
+                            </h3>
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="text" id="admin-parcel-cus-name" placeholder="ชื่อลูกค้า หรือ รหัสออเดอร์" class="col-span-2 bg-cherie-appBg border border-cherie-pastel rounded-[12px] p-2.5 text-[12px] font-medium focus:outline-none">
+                                <input type="text" id="admin-parcel-carrier" placeholder="ขนส่ง (เช่น Flash / J&T / EMS)" class="bg-cherie-appBg border border-cherie-pastel rounded-[12px] p-2.5 text-[12px] font-medium focus:outline-none">
+                                <input type="text" id="admin-parcel-number" placeholder="เลขพัสดุ (เช่น TH0123456)" class="bg-cherie-appBg border border-cherie-pastel rounded-[12px] p-2.5 text-[12px] font-bold focus:outline-none">
+                            </div>
+                            <button onclick="saveParcelTrackingToCloud()" class="w-full bg-gradient-to-r from-[#C5A059] to-[#9E7B3B] text-white font-bold py-2.5 rounded-[12px] text-[12px] shadow-sm active:scale-95">บันทึกเลขพัสดุ ✨</button>
+                            <div class="space-y-2 max-h-48 overflow-y-auto pt-2" id="admin-parcels-list"></div>
+                        </div>
+
+                        <div class="bg-white rounded-[24px] p-5 border border-cherie-pastel shadow-sm space-y-3">
+                            <div class="flex items-center justify-between border-b border-cherie-pastel pb-2.5">
+                                <h3 class="text-[13px] font-extrabold text-cherie-dark flex items-center gap-2">
+                                    <i class="fa-solid fa-receipt text-cherie-accent"></i> รายการคำสั่งซื้อจากลูกค้า
+                                </h3>
+                                <span id="admin-orders-count" class="text-[11px] font-bold text-cherie-accent">0 รายการ</span>
+                            </div>
+                            <div class="space-y-3 max-h-[460px] overflow-y-auto pr-1" id="admin-orders-list"></div>
+                        </div>
+                    </div>
+
+                    <!-- ADMIN: PRODUCTS (เพิ่มตัวเลือกชนิดยาง สี และภาพสี) -->
                     <div id="admin-sec-products" class="admin-sec space-y-4 hidden">
                         <div class="bg-white rounded-[24px] p-5 border border-cherie-pastel shadow-sm space-y-4">
                             <h3 class="text-[13px] font-extrabold text-cherie-dark border-b border-cherie-pastel pb-3 flex items-center justify-between">
@@ -361,8 +418,29 @@
                                     <div><label class="block text-[11px] font-bold mb-1 ml-1 text-cherie-gray">ป้ายพิเศษ (เช่น New / Hot)</label><input type="text" id="add-prod-tag" class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[14px] p-3 text-[13px] font-medium focus:outline-none focus:border-cherie-accent"></div>
                                 </div>
                                 <div><label class="block text-[11px] font-bold mb-1 ml-1 text-cherie-gray">หมวดหมู่</label><select id="add-prod-category" class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[14px] p-3 text-[13px] font-medium focus:outline-none focus:border-cherie-accent"></select></div>
-                                <div><label class="block text-[11px] font-bold mb-1 ml-1 text-cherie-gray">รายละเอียดสินค้า</label><textarea id="add-prod-desc" rows="4" class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[14px] p-3 text-[13px] font-medium focus:outline-none focus:border-cherie-accent"></textarea></div>
-                                <div><label class="block text-[11px] font-bold mb-1 ml-1 text-cherie-gray">รูปภาพสินค้า</label><input type="file" id="add-prod-image-file" accept="image/*" class="w-full bg-white border border-cherie-pastel rounded-[14px] p-1.5 text-[11px] text-cherie-gray file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-[11px] file:font-bold file:bg-cherie-pink file:text-cherie-accent"></div>
+                                <div><label class="block text-[11px] font-bold mb-1 ml-1 text-cherie-gray">รายละเอียดสินค้า</label><textarea id="add-prod-desc" rows="3" class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[14px] p-3 text-[13px] font-medium focus:outline-none focus:border-cherie-accent"></textarea></div>
+                                <div><label class="block text-[11px] font-bold mb-1 ml-1 text-cherie-gray">รูปภาพหลักของสินค้า</label><input type="file" id="add-prod-image-file" accept="image/*" class="w-full bg-white border border-cherie-pastel rounded-[14px] p-1.5 text-[11px] text-cherie-gray file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-[11px] file:font-bold file:bg-cherie-pink file:text-cherie-accent"></div>
+
+                                <!-- ฟอร์มเพิ่ม ชนิดยาง + สี + ภาพสี -->
+                                <div class="bg-cherie-appBg p-3.5 rounded-[18px] border border-cherie-pastel space-y-2.5">
+                                    <label class="block text-[12px] font-extrabold text-cherie-dark flex items-center gap-1.5">
+                                        <i class="fa-solid fa-swatchbook text-cherie-accent"></i> ตัวเลือกสินค้า: ชนิดยาง / สี / ภาพสี
+                                    </label>
+                                    <div>
+                                        <label class="block text-[10px] font-bold text-cherie-gray mb-1">ชนิดยาง (คั่นด้วยลูกน้ำ , เช่น ยางโอริง, ยางเชน, ยางทวิส)</label>
+                                        <input type="text" id="add-prod-band-types" placeholder="เช่น ยางโอริง, ยางเชน, ยางทวิส" class="w-full bg-white border border-cherie-pastel rounded-[12px] p-2.5 text-[12px] font-medium focus:outline-none focus:border-cherie-accent">
+                                    </div>
+                                    <div class="space-y-2 pt-1 border-t border-cherie-pastel/70">
+                                        <label class="block text-[10px] font-bold text-cherie-gray">เพิ่มสีและภาพสีของสินค้า</label>
+                                        <div class="grid grid-cols-2 gap-2">
+                                            <input type="text" id="add-color-name" placeholder="ชื่อสี (เช่น สีชมพูพาสเทล)" class="bg-white border border-cherie-pastel rounded-[10px] p-2 text-[12px] font-medium">
+                                            <input type="file" id="add-color-img-file" accept="image/*" class="bg-white border border-cherie-pastel rounded-[10px] p-1 text-[10px] text-cherie-gray file:mr-1.5 file:py-1 file:px-2 file:rounded-md file:border-0 file:bg-cherie-pink file:text-cherie-accent file:font-bold">
+                                        </div>
+                                        <button type="button" id="btn-temp-add-color" onclick="addTempColorOption('add')" class="w-full bg-white border border-cherie-accent text-cherie-accent font-bold py-2 rounded-[10px] text-[11px] hover:bg-cherie-pink transition-all">+ เพิ่มสีและภาพสีลงรายการ</button>
+                                        <div id="add-prod-colors-preview" class="flex flex-wrap gap-2 pt-1"></div>
+                                    </div>
+                                </div>
+
                                 <label class="flex items-center gap-2 text-[12px] text-cherie-dark font-bold ml-1 pt-1"><input type="checkbox" id="add-prod-recom" checked class="w-4 h-4 rounded text-cherie-accent"> แสดงในหน้าแรก (สินค้าแนะนำ)</label>
                                 <button id="btn-add-prod" onclick="addProductToCloud()" class="w-full bg-gradient-to-r from-[#C5A059] to-[#9E7B3B] text-white font-bold py-3.5 rounded-[16px] text-[13px] shadow-md active:scale-95 transition-all">บันทึกสินค้าขึ้นระบบ ✨</button>
                             </div>
@@ -370,69 +448,66 @@
 
                         <!-- Category Manager -->
                         <div class="bg-white rounded-[24px] p-5 border border-cherie-pastel shadow-sm space-y-3.5">
-                            <h3 class="text-[13px] font-extrabold text-cherie-dark border-b border-cherie-pastel pb-2.5 flex items-center gap-2"><i class="fa-solid fa-layer-group text-cherie-accent"></i> จัดการหมวดหมู่สินค้า</h3>
+                            <h3 class="text-[13px] font-extrabold text-cherie-dark border-b border-cherie-pastel pb-2.5 flex items-center gap-2"><i class="fa-solid fa-list text-cherie-accent"></i> จัดการหมวดหมู่สินค้า</h3>
                             <div class="flex gap-2">
-                                <input type="text" id="add-cat-name" placeholder="ชื่อหมวดหมู่ (เช่น ชุดเดรส)" class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[14px] p-2.5 text-[12px] font-medium focus:outline-none">
-                                <input type="text" id="add-cat-emoji" placeholder="👗" class="w-16 bg-cherie-appBg border border-cherie-pastel rounded-[14px] p-2.5 text-[12px] text-center focus:outline-none">
+                                <input type="text" id="add-cat-name" placeholder="ชื่อหมวดหมู่ (เช่น ยางโอริง / เซ็ตอุปกรณ์)" class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[14px] p-2.5 text-[12px] font-medium focus:outline-none">
+                                <input type="text" id="add-cat-emoji" placeholder="✨" class="w-16 bg-cherie-appBg border border-cherie-pastel rounded-[14px] p-2.5 text-[12px] text-center">
                                 <button onclick="addCategoryToCloud()" class="bg-cherie-dark text-white font-bold px-4 rounded-[14px] text-[12px] shadow-sm active:scale-95">เพิ่ม</button>
                             </div>
                             <div class="flex flex-wrap gap-2 pt-1" id="admin-category-list"></div>
                         </div>
 
-                        <!-- Product List -->
+                        <!-- Products List -->
                         <div class="bg-white rounded-[24px] p-5 border border-cherie-pastel shadow-sm space-y-3">
                             <div class="flex justify-between items-center border-b border-cherie-pastel pb-2.5">
-                                <h3 class="text-[13px] font-extrabold text-cherie-dark">รายการสินค้าทั้งหมด (<span id="admin-product-count">0</span>)</h3>
+                                <h3 class="text-[13px] font-extrabold text-cherie-dark">รายการสินค้าในร้าน (<span id="admin-product-count">0</span>)</h3>
                             </div>
                             <input type="text" id="admin-product-search" oninput="window.renderAdminLists()" placeholder="🔍 ค้นหาชื่อสินค้า..." class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[14px] p-2.5 text-[12px] font-medium focus:outline-none">
                             <div class="space-y-2.5 max-h-72 overflow-y-auto pr-1" id="admin-products-list"></div>
                         </div>
                     </div>
 
-                    <!-- ADMIN: PROMO BANNERS (เหลือเฉพาะการอัปโหลดพื้นหลังแบนเนอร์ตามบรีฟ) -->
+                    <!-- ADMIN: PROMO BANNERS -->
                     <div id="admin-sec-promo" class="admin-sec space-y-4 hidden">
                         <div class="bg-white rounded-[24px] p-5 border border-cherie-pastel shadow-sm space-y-4">
                             <h3 class="text-[13px] font-extrabold text-cherie-dark border-b border-cherie-pastel pb-3 flex items-center gap-2">
-                                <i class="fa-solid fa-image text-cherie-accent"></i> เพิ่มรูปพื้นหลังแบนเนอร์
+                                <i class="fa-solid fa-image text-cherie-accent"></i> เพิ่มแบนเนอร์ (เฉพาะรูปพื้นหลังแบนเนอร์)
                             </h3>
                             <div class="space-y-3">
                                 <div>
-                                    <label class="block text-[11px] font-bold mb-1.5 ml-1 text-cherie-gray">เลือกรูปพื้นหลังแบนเนอร์</label>
+                                    <label class="block text-[11px] font-bold mb-1.5 ml-1 text-cherie-gray">อัปโหลดรูปพื้นหลังแบนเนอร์</label>
                                     <input type="file" id="promo-banner-bg-image-file" accept="image/*" class="w-full bg-white border border-cherie-pastel rounded-[14px] p-1.5 text-[11px] text-cherie-gray file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-[11px] file:font-bold file:bg-cherie-pink file:text-cherie-accent">
                                 </div>
                                 <div>
-                                    <label class="block text-[11px] font-bold mb-1 ml-1 text-cherie-gray">หรือวางลิงก์รูปภาพโดยตรง (URL)</label>
+                                    <label class="block text-[11px] font-bold mb-1 ml-1 text-cherie-gray">หรือวางลิงก์รูปภาพแบนเนอร์โดยตรง</label>
                                     <input type="text" id="promo-banner-bg-url" placeholder="https://..." class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[14px] p-3 text-[12px] font-medium focus:outline-none focus:border-cherie-accent">
                                 </div>
-                                <button id="btn-add-promo" onclick="addPromoBannerToCloud()" class="w-full bg-gradient-to-r from-[#C5A059] to-[#9E7B3B] text-white font-bold py-3.5 rounded-[16px] text-[13px] shadow-md active:scale-95 transition-all">เพิ่มแบนเนอร์ ✨</button>
+                                <button id="btn-add-promo" onclick="addPromoBannerToCloud()" class="w-full bg-gradient-to-r from-[#C5A059] to-[#9E7B3B] text-white font-bold py-3.5 rounded-[16px] text-[13px] shadow-md active:scale-95 transition-all">เพิ่มรูปพื้นหลังแบนเนอร์ ✨</button>
                             </div>
                         </div>
                         <div class="bg-white rounded-[24px] p-5 border border-cherie-pastel shadow-sm space-y-3">
-                            <h3 class="text-[13px] font-extrabold text-cherie-dark border-b border-cherie-pastel pb-2.5">แบนเนอร์ปัจจุบัน (<span id="promo-banner-count">0</span>)</h3>
-                            <div class="space-y-2.5 max-h-64 overflow-y-auto pr-1" id="admin-promo-list"></div>
+                            <h3 class="text-[13px] font-extrabold text-cherie-dark border-b border-cherie-pastel pb-2.5">รายการแบนเนอร์ทั้งหมด (<span id="promo-banner-count">0</span>)</h3>
+                            <div class="space-y-2.5 max-h-60 overflow-y-auto pr-1" id="admin-promo-list"></div>
                         </div>
                     </div>
 
                     <!-- ADMIN: HIGHLIGHTS -->
                     <div id="admin-sec-highlights" class="admin-sec space-y-4 hidden">
                         <div class="bg-white rounded-[24px] p-5 border border-cherie-pastel shadow-sm space-y-4">
-                            <h3 class="text-[13px] font-extrabold text-cherie-dark border-b border-cherie-pastel pb-3 flex items-center gap-2">
-                                <i class="fa-solid fa-circle-play text-cherie-accent"></i> เพิ่มไฮไลท์สตอรี่ใหม่
-                            </h3>
+                            <h3 class="text-[13px] font-extrabold text-cherie-dark border-b border-cherie-pastel pb-3 flex items-center gap-2"><i class="fa-solid fa-circle-play text-cherie-accent"></i> เพิ่มไฮไลท์สตอรี่ใหม่</h3>
                             <div class="space-y-3">
-                                <div><label class="block text-[11px] font-bold mb-1 ml-1 text-cherie-gray">ชื่อไฮไลท์</label><input type="text" id="admin-hl-name" class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[14px] p-3 text-[13px] font-medium focus:outline-none"></div>
-                                <div><label class="block text-[11px] font-bold mb-1 ml-1 text-cherie-gray">ไอคอน (Emoji)</label><input type="text" id="admin-hl-icon" placeholder="✨" class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[14px] p-3 text-[13px] font-medium focus:outline-none"></div>
+                                <div><label class="block text-[11px] font-bold mb-1 ml-1 text-cherie-gray">ชื่อไฮไลท์</label><input type="text" id="admin-hl-name" placeholder="เช่น รีวิวสียาง / เซ็ตขายดี" class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[14px] p-3 text-[13px] font-medium focus:outline-none"></div>
+                                <div><label class="block text-[11px] font-bold mb-1 ml-1 text-cherie-gray">ไอคอนหน้าปก (Emoji)</label><input type="text" id="admin-hl-icon" placeholder="✨" class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[14px] p-3 text-[13px] font-medium focus:outline-none"></div>
                                 <div>
                                     <label class="block text-[11px] font-bold mb-1 ml-1 text-cherie-gray">อัปโหลดรูปภาพ/วิดีโอ (เลือกได้หลายไฟล์)</label>
                                     <input type="file" id="admin-hl-files" accept="image/*,video/*" multiple class="w-full bg-white border border-cherie-pastel rounded-[14px] p-1.5 text-[11px] text-cherie-gray file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-[11px] file:font-bold file:bg-cherie-pink file:text-cherie-accent">
                                 </div>
-                                <button id="btn-add-hl" onclick="addHighlightToCloud()" class="w-full bg-gradient-to-r from-[#C5A059] to-[#9E7B3B] text-white font-bold py-3.5 rounded-[16px] text-[13px] shadow-md active:scale-95 transition-all">เพิ่มไฮไลท์ใหม่ ✨</button>
+                                <button id="btn-add-hl" onclick="addHighlightToCloud()" class="w-full bg-gradient-to-r from-[#C5A059] to-[#9E7B3B] text-white font-bold py-3.5 rounded-[16px] text-[13px] shadow-md active:scale-95 transition-all">บันทึกไฮไลท์ใหม่ ✨</button>
                             </div>
                         </div>
                         <div class="bg-white rounded-[24px] p-5 border border-cherie-pastel shadow-sm space-y-3">
                             <div class="flex items-center justify-between border-b border-cherie-pastel pb-2.5">
-                                <h3 class="text-[13px] font-extrabold text-cherie-dark">รายการไฮไลท์ทั้งหมด</h3>
-                                <span class="text-[10px] text-cherie-gray">กดปุ่มดินสอเพื่อเพิ่ม/ลบรูปในไฮไลท์</span>
+                                <h3 class="text-[13px] font-extrabold text-cherie-dark">จัดการไฮไลท์ (กดแก้ไขเพื่อเพิ่มรูปได้)</h3>
                             </div>
                             <div class="space-y-2.5 max-h-64 overflow-y-auto" id="admin-highlights-list"></div>
                         </div>
@@ -441,9 +516,7 @@
                     <!-- ADMIN: REVIEWS -->
                     <div id="admin-sec-reviews" class="admin-sec space-y-4 hidden">
                         <div class="bg-white rounded-[24px] p-5 border border-cherie-pastel shadow-sm space-y-3">
-                            <h3 class="text-[13px] font-extrabold text-cherie-dark border-b border-cherie-pastel pb-2.5 flex items-center gap-2">
-                                <i class="fa-solid fa-star text-cherie-accent"></i> จัดการรีวิวลูกค้า
-                            </h3>
+                            <h3 class="text-[13px] font-extrabold text-cherie-dark border-b border-cherie-pastel pb-2.5 flex items-center gap-2"><i class="fa-solid fa-star text-cherie-accent"></i> จัดการรีวิวลูกค้า</h3>
                             <div class="space-y-2.5 max-h-96 overflow-y-auto pr-1" id="admin-reviews-list"></div>
                         </div>
                     </div>
@@ -451,23 +524,22 @@
                     <!-- ADMIN: LOYALTY -->
                     <div id="admin-sec-loyalty" class="admin-sec space-y-4 hidden">
                         <div class="bg-white rounded-[24px] p-5 border border-cherie-pastel shadow-sm space-y-3.5">
-                            <h3 class="text-[13px] font-extrabold text-cherie-dark border-b border-cherie-pastel pb-2.5 flex items-center gap-2">
-                                <i class="fa-solid fa-gem text-cherie-accent"></i> เพิ่ม/อัปเดตแต้มสะสมลูกค้า
-                            </h3>
-                            <div class="grid grid-cols-3 gap-2">
-                                <input type="text" id="admin-loyalty-cus-name" placeholder="ชื่อลูกค้า" class="col-span-2 bg-cherie-appBg border border-cherie-pastel rounded-[12px] p-2.5 text-[12px] font-medium focus:outline-none">
-                                <input type="number" id="admin-loyalty-cus-pts" placeholder="แต้ม" value="1" class="bg-cherie-appBg border border-cherie-pastel rounded-[12px] p-2.5 text-[12px] font-bold focus:outline-none">
+                            <h3 class="text-[13px] font-extrabold text-cherie-dark border-b border-cherie-pastel pb-2.5 flex items-center gap-2"><i class="fa-solid fa-gem text-cherie-accent"></i> ตั้งค่าและเพิ่มแต้มสะสมลูกค้า</h3>
+                            <div class="flex gap-2">
+                                <input type="number" id="admin-loyalty-target" placeholder="แต้มเป้าหมาย (เช่น 10)" class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[14px] p-2.5 text-[12px] font-medium">
+                                <button onclick="updateLoyaltyRate()" class="bg-cherie-dark text-white font-bold px-4 rounded-[14px] text-[12px] whitespace-nowrap">บันทึกเป้าหมาย</button>
                             </div>
-                            <button onclick="addCustomerLoyaltyPoints()" class="w-full bg-cherie-dark text-white font-bold py-2.5 rounded-[12px] text-[12px] shadow-sm active:scale-95">เพิ่มแต้มให้ลูกค้า</button>
-
-                            <div class="pt-3 border-t border-cherie-pastel flex items-center gap-2">
-                                <span class="text-[11px] font-bold text-cherie-gray whitespace-nowrap">เป้าหมายแลกรางวัล (แต้ม):</span>
-                                <input type="number" id="admin-loyalty-target" class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[12px] p-2 text-[12px] font-bold">
-                                <button onclick="updateLoyaltyRate()" class="bg-cherie-accent text-white font-bold px-3.5 py-2 rounded-[12px] text-[11px] whitespace-nowrap">บันทึก</button>
+                            <div class="pt-2 border-t border-cherie-pastel space-y-2">
+                                <label class="block text-[11px] font-bold text-cherie-gray">เพิ่มรายชื่อลูกค้า / เพิ่มแต้ม</label>
+                                <div class="flex gap-2">
+                                    <input type="text" id="admin-loyalty-cus-name" placeholder="ชื่อลูกค้า..." class="flex-1 bg-cherie-appBg border border-cherie-pastel rounded-[14px] p-2.5 text-[12px]">
+                                    <input type="number" id="admin-loyalty-cus-pts" value="1" class="w-16 bg-cherie-appBg border border-cherie-pastel rounded-[14px] p-2.5 text-[12px] text-center">
+                                    <button onclick="addCustomerLoyaltyPoints()" class="bg-cherie-accent text-white font-bold px-4 rounded-[14px] text-[12px]">+ แต้ม</button>
+                                </div>
                             </div>
                         </div>
                         <div class="bg-white rounded-[24px] p-5 border border-cherie-pastel shadow-sm space-y-3">
-                            <h3 class="text-[13px] font-extrabold text-cherie-dark border-b border-cherie-pastel pb-2.5">รายชื่อลูกค้าที่มีแต้มสะสม</h3>
+                            <h3 class="text-[13px] font-extrabold text-cherie-dark border-b border-cherie-pastel pb-2.5">รายชื่อลูกค้าสะสมแต้ม</h3>
                             <div class="space-y-2.5 max-h-64 overflow-y-auto pr-1" id="admin-loyalty-list"></div>
                         </div>
                     </div>
@@ -476,25 +548,213 @@
             </div>
         </div>
 
-        <!-- Product Details Modal -->
+        <!-- Product Details Modal (เพิ่มการเลือก ชนิดยาง / สี / ภาพสี และปุ่มเพิ่มลงคำสั่งซื้อ) -->
         <div id="product-details-modal" class="absolute inset-0 bg-black/60 backdrop-blur-sm z-[80] flex items-center justify-center px-4 opacity-0 pointer-events-none transition-opacity duration-300">
-            <div class="bg-white rounded-[32px] p-6 w-full max-w-sm relative shadow-2xl scale-95 transition-transform duration-300 flex flex-col max-h-[82vh] border border-cherie-pastel">
+            <div class="bg-white rounded-[32px] p-5 w-full max-w-sm relative shadow-2xl scale-95 transition-transform duration-300 flex flex-col max-h-[86vh] border border-cherie-pastel">
                 <button onclick="closeProductDetails()" class="absolute top-4 right-4 bg-white/90 text-gray-600 w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-100 z-20 shadow-sm border border-gray-200"><i class="fa-solid fa-xmark"></i></button>
-                <div class="w-full aspect-square rounded-[20px] overflow-hidden bg-cherie-appBg mb-4 relative border border-cherie-pastel/60" id="pd-modal-img-container"></div>
-                <div class="overflow-y-auto no-scrollbar flex-1 pb-3">
-                    <h3 class="font-extrabold text-cherie-dark text-[18px] leading-tight" id="pd-modal-name"></h3>
-                    <div class="flex items-center gap-2 mt-2">
-                        <span class="text-cherie-accent text-[20px] font-black" id="pd-modal-price"></span>
-                        <span class="text-[10px] bg-cherie-pink text-cherie-accent px-2.5 py-0.5 rounded-full font-bold border border-cherie-pastel" id="pd-modal-category"></span>
+                <div class="w-full aspect-square rounded-[20px] overflow-hidden bg-cherie-appBg mb-3 relative border border-cherie-pastel/60" id="pd-modal-img-container"></div>
+                <div class="overflow-y-auto no-scrollbar flex-1 space-y-3 pb-2">
+                    <div>
+                        <h3 class="font-extrabold text-cherie-dark text-[17px] leading-tight" id="pd-modal-name"></h3>
+                        <div class="flex items-center gap-2 mt-1.5">
+                            <span class="text-cherie-accent text-[20px] font-black" id="pd-modal-price"></span>
+                            <span class="text-[10px] bg-cherie-pink text-cherie-accent px-2.5 py-0.5 rounded-full font-bold border border-cherie-pastel" id="pd-modal-category"></span>
+                        </div>
                     </div>
-                    <p class="text-[13px] text-cherie-gray mt-3 whitespace-pre-wrap leading-relaxed font-medium" id="pd-modal-desc"></p>
+
+                    <!-- ส่วนเลือก ชนิดยาง -->
+                    <div id="pd-band-type-section" class="space-y-1.5 hidden">
+                        <label class="block text-[11px] font-extrabold text-cherie-dark">เลือกชนิดยาง:</label>
+                        <div id="pd-band-type-options" class="flex flex-wrap gap-1.5"></div>
+                    </div>
+
+                    <!-- ส่วนเลือก สี และ ภาพสี -->
+                    <div id="pd-color-section" class="space-y-1.5 hidden">
+                        <label class="block text-[11px] font-extrabold text-cherie-dark flex items-center justify-between">
+                            <span>เลือกสี (แตะเพื่อดูภาพสี):</span>
+                            <span id="pd-selected-color-label" class="text-cherie-accent font-bold"></span>
+                        </label>
+                        <div id="pd-color-options" class="grid grid-cols-3 gap-2"></div>
+                    </div>
+
+                    <!-- กรณีสินค้าไม่ได้ตั้งค่าสีไว้ ให้พิมพ์ระบุสี/ชนิดยางเองได้ -->
+                    <div id="pd-custom-note-section" class="space-y-1.5">
+                        <label class="block text-[11px] font-bold text-cherie-gray">ระบุสี / ชนิดยางเพิ่มเติม (ถ้ามี):</label>
+                        <input type="text" id="pd-custom-option-input" placeholder="เช่น ยางโอริง สีชมพู / ยางเชน สีฟ้า..." class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[12px] px-3 py-2 text-[12px] font-medium focus:outline-none focus:border-cherie-accent">
+                    </div>
+
+                    <p class="text-[12px] text-cherie-gray whitespace-pre-wrap leading-relaxed font-medium" id="pd-modal-desc"></p>
                 </div>
                 <div class="mt-2 pt-3 border-t border-cherie-pastel flex flex-col gap-2">
-                    <p class="text-[11px] font-bold text-cherie-dark text-center">สนใจสินค้าชิ้นนี้ ทักแชทสั่งซื้อผ่าน LINE ได้เลยค่ะ</p>
                     <div class="grid grid-cols-2 gap-2">
-                        <a id="pd-line-1" href="https://line.me/ti/p/WQkxdgrbzs" target="_blank" rel="noopener" class="bg-[#06C755] text-white py-3 rounded-[14px] text-[12px] font-bold shadow-sm flex items-center justify-center gap-1.5 active:scale-95"><i class="fa-brands fa-line"></i> LINE ช่องทาง 1</a>
-                        <a id="pd-line-2" href="https://line.me/ti/p/HJN4eqHpZm" target="_blank" rel="noopener" class="bg-cherie-accent text-white py-3 rounded-[14px] text-[12px] font-bold shadow-sm flex items-center justify-center gap-1.5 active:scale-95"><i class="fa-brands fa-line"></i> LINE ช่องทาง 2</a>
+                        <button onclick="addSelectedProductToOrder(false)" class="bg-cherie-pink text-cherie-dark border border-cherie-accent/50 py-3 rounded-[14px] text-[12px] font-extrabold shadow-sm flex items-center justify-center gap-1.5 active:scale-95">
+                            <i class="fa-solid fa-plus text-cherie-accent"></i> เพิ่มในคำสั่งซื้อ
+                        </button>
+                        <button onclick="addSelectedProductToOrder(true)" class="bg-gradient-to-r from-[#C5A059] to-[#9E7B3B] text-white py-3 rounded-[14px] text-[12px] font-extrabold shadow-md flex items-center justify-center gap-1.5 active:scale-95">
+                            <i class="fa-solid fa-bag-shopping"></i> สั่งซื้อ/โอนเงิน
+                        </button>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order & Payment Modal (หน้าต่างคำสั่งซื้อ + เลือกโอนเงิน 3 ช้อยส์ + ใส่ไลน์ขอวิธีติด) -->
+        <div id="order-checkout-modal" class="absolute inset-0 bg-black/60 backdrop-blur-sm z-[88] flex items-end sm:items-center justify-center sm:px-4 opacity-0 pointer-events-none transition-opacity duration-300">
+            <div class="bg-white rounded-t-[32px] sm:rounded-[32px] p-5 w-full max-w-md relative shadow-2xl flex flex-col max-h-[90vh] border border-cherie-pastel">
+                <div class="flex items-center justify-between border-b border-cherie-pastel pb-3 mb-3">
+                    <h3 class="font-extrabold text-cherie-dark text-[16px] flex items-center gap-2">
+                        <i class="fa-solid fa-bag-shopping text-cherie-accent"></i> รายการคำสั่งซื้อและโอนเงิน
+                    </h3>
+                    <button onclick="closeOrderModal()" class="w-8 h-8 rounded-full bg-cherie-pink text-cherie-dark flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <div class="overflow-y-auto no-scrollbar flex-1 space-y-4 pr-0.5">
+                    <!-- รายการสินค้าที่เลือก -->
+                    <div id="order-cart-items" class="space-y-2"></div>
+
+                    <!-- เลือกตัวเลือกการโอนเงิน 3 ช้อยส์ -->
+                    <div class="bg-cherie-appBg p-3.5 rounded-[18px] border border-cherie-pastel space-y-2">
+                        <label class="block text-[12px] font-extrabold text-cherie-dark flex items-center gap-1.5">
+                            <i class="fa-solid fa-truck text-cherie-accent"></i> เลือกรูปแบบการจัดส่งและโอนเงิน (3 ช้อยส์)
+                        </label>
+
+                        <label id="ship-opt-label-free200" class="flex items-start gap-2.5 p-2.5 rounded-[14px] bg-white border border-cherie-pastel cursor-pointer transition-all">
+                            <input type="radio" name="shipping_option" value="free200" onchange="updateOrderTotals()" class="mt-1 text-cherie-accent">
+                            <div class="flex-1 text-[12px]">
+                                <div class="font-extrabold text-cherie-dark flex justify-between">
+                                    <span>1. ซื้อครบ 200 ส่งฟรี</span>
+                                    <span class="text-emerald-600 font-black">ส่งฟรี (฿0)</span>
+                                </div>
+                                <p class="text-[10px] text-cherie-gray">รอรับสินค้า 2-3 วัน <span id="free200-hint" class="text-red-500 font-bold"></span></p>
+                            </div>
+                        </label>
+
+                        <label class="flex items-start gap-2.5 p-2.5 rounded-[14px] bg-white border border-cherie-pastel cursor-pointer transition-all">
+                            <input type="radio" name="shipping_option" value="cod50" onchange="updateOrderTotals()" class="mt-1 text-cherie-accent">
+                            <div class="flex-1 text-[12px]">
+                                <div class="font-extrabold text-cherie-dark flex justify-between">
+                                    <span>2. ปลายทาง (โอนมัดจำก่อน 50฿)</span>
+                                    <span class="text-cherie-accent font-black">โอนก่อน ฿50</span>
+                                </div>
+                                <p class="text-[10px] text-cherie-gray">รอรับสินค้า 5-7 วัน (ยอดที่เหลือชำระปลายทาง)</p>
+                            </div>
+                        </label>
+
+                        <label class="flex items-start gap-2.5 p-2.5 rounded-[14px] bg-white border border-cherie-pastel cursor-pointer transition-all">
+                            <input type="radio" name="shipping_option" value="normal35" checked onchange="updateOrderTotals()" class="mt-1 text-cherie-accent">
+                            <div class="flex-1 text-[12px]">
+                                <div class="font-extrabold text-cherie-dark flex justify-between">
+                                    <span>3. ซื้อปกติ (ค่าส่ง +35฿)</span>
+                                    <span class="text-cherie-dark font-black">+฿35</span>
+                                </div>
+                                <p class="text-[10px] text-cherie-gray">รอรับสินค้า 2-3 วัน</p>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- สรุปยอดโอน -->
+                    <div class="bg-cherie-pink/60 p-3.5 rounded-[18px] border border-cherie-pastel space-y-1.5 text-[12px]">
+                        <div class="flex justify-between text-cherie-gray">
+                            <span>รวมค่าสินค้า:</span>
+                            <span id="order-subtotal-txt" class="font-bold text-cherie-dark">฿0</span>
+                        </div>
+                        <div class="flex justify-between text-cherie-gray">
+                            <span>รูปแบบจัดส่ง:</span>
+                            <span id="order-shipping-txt" class="font-bold text-cherie-dark">+฿35</span>
+                        </div>
+                        <div class="flex justify-between text-[14px] font-extrabold text-cherie-dark pt-1.5 border-t border-cherie-pastel">
+                            <span>ยอดที่ต้องโอนตอนนี้:</span>
+                            <span id="order-paynow-txt" class="text-cherie-accent text-[17px] font-black">฿0</span>
+                        </div>
+                        <p id="order-cod-remain-txt" class="text-[11px] text-amber-700 font-bold text-right hidden"></p>
+                    </div>
+
+                    <!-- ข้อมูลบัญชีโอนเงิน + แนบสลิป -->
+                    <div class="bg-white p-3.5 rounded-[18px] border border-cherie-pastel space-y-3 text-[12px]">
+                        <h4 class="font-extrabold text-cherie-dark text-[12px] flex items-center gap-1.5 border-b border-cherie-pastel pb-2">
+                            <i class="fa-solid fa-building-columns text-cherie-accent"></i> ช่องทางโอนชำระเงิน (กดคัดลอกเลขได้ทันที)
+                        </h4>
+
+                        <!-- QR Code -->
+                        <div id="checkout-qr-box" class="text-center bg-cherie-appBg p-3 rounded-[14px] border border-cherie-pastel">
+                            <p class="text-[11px] font-extrabold text-cherie-dark mb-2">สแกนคิวอาร์โค้ดเพื่อโอนเงิน</p>
+                            <img id="checkout-qr-img-display" src="https://i.postimg.cc/HxbTXRYJ/att-BYyf8o7a0IRgo-Oe-Bpj1Ln-C9b3Ifdh1a60-V3BNv-L0.jpg" onclick="window.viewFullImage(this.src)" class="w-40 h-40 object-contain mx-auto rounded-xl border border-cherie-pastel p-1.5 bg-white shadow-sm cursor-pointer">
+                            <p class="text-[10px] text-cherie-gray mt-1.5">แตะที่รูป QR Code เพื่อขยายใหญ่</p>
+                        </div>
+
+                        <!-- รายการบัญชีแยกชัดเจน คัดลอกเฉพาะตัวเลขได้ง่าย -->
+                        <div class="space-y-2">
+                            <!-- 1. พร้อมเพย์ / วอเลท -->
+                            <div class="bg-cherie-appBg p-2.5 rounded-[14px] border border-cherie-pastel flex items-center justify-between gap-2">
+                                <div class="min-w-0">
+                                    <span class="inline-block text-[10px] font-extrabold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-md mb-0.5">พร้อมเพย์ / ทรูมันนี่วอเลท</span>
+                                    <p class="font-black text-cherie-dark text-[14px] tracking-wide">0931269502</p>
+                                    <p class="text-[11px] text-cherie-gray font-bold">🎈 ชื่อ ทัตพงศ์ กุลาสี 🎈</p>
+                                </div>
+                                <button type="button" onclick="window.copyAccountNumber('0931269502')" class="bg-white text-cherie-accent border border-cherie-accent/50 px-3 py-2 rounded-xl text-[11px] font-extrabold shadow-sm active:scale-95 flex-shrink-0 flex items-center gap-1">
+                                    <i class="fa-regular fa-copy"></i> คัดลอกเลข
+                                </button>
+                            </div>
+
+                            <!-- 2. ธนาคารกสิกรไทย -->
+                            <div class="bg-cherie-appBg p-2.5 rounded-[14px] border border-cherie-pastel flex items-center justify-between gap-2">
+                                <div class="min-w-0">
+                                    <span class="inline-block text-[10px] font-extrabold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-md mb-0.5">✅ ธนาคารกสิกรไทย ✅</span>
+                                    <p class="font-black text-cherie-dark text-[14px] tracking-wide">0208663828</p>
+                                    <p class="text-[11px] text-cherie-gray font-bold">🎈 ชื่อ ทัตพงศ์ กุลาสี 🎈</p>
+                                </div>
+                                <button type="button" onclick="window.copyAccountNumber('0208663828')" class="bg-white text-cherie-accent border border-cherie-accent/50 px-3 py-2 rounded-xl text-[11px] font-extrabold shadow-sm active:scale-95 flex-shrink-0 flex items-center gap-1">
+                                    <i class="fa-regular fa-copy"></i> คัดลอกเลข
+                                </button>
+                            </div>
+
+                            <!-- 3. ธนาคารออมสิน -->
+                            <div class="bg-cherie-appBg p-2.5 rounded-[14px] border border-cherie-pastel flex items-center justify-between gap-2">
+                                <div class="min-w-0">
+                                    <span class="inline-block text-[10px] font-extrabold bg-pink-100 text-pink-700 px-2 py-0.5 rounded-md mb-0.5">ธนาคารออมสิน</span>
+                                    <p class="font-black text-cherie-dark text-[14px] tracking-wide">020479957829</p>
+                                    <p class="text-[11px] text-cherie-gray font-bold">🎈 ชื่อ นางสาว เสฏฐิกัลยา ถึงทรัพย์ 🎈</p>
+                                </div>
+                                <button type="button" onclick="window.copyAccountNumber('020479957829')" class="bg-white text-cherie-accent border border-cherie-accent/50 px-3 py-2 rounded-xl text-[11px] font-extrabold shadow-sm active:scale-95 flex-shrink-0 flex items-center gap-1">
+                                    <i class="fa-regular fa-copy"></i> คัดลอกเลข
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 border-t border-cherie-pastel">
+                            <label class="block text-[11px] font-extrabold text-cherie-dark mb-1">แนบสลิปโอนเงิน:</label>
+                            <input type="file" id="order-slip-file" accept="image/*" class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[12px] p-1 text-[11px] text-cherie-gray file:mr-2 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-[11px] file:font-bold file:bg-cherie-pink file:text-cherie-accent">
+                        </div>
+                    </div>
+
+                    <!-- ข้อมูลลูกค้า + ช่องใส่ LINE เพื่อขอวิธีติด -->
+                    <div class="bg-white p-3.5 rounded-[18px] border border-cherie-pastel space-y-2.5 text-[12px]">
+                        <h4 class="font-extrabold text-cherie-dark text-[12px] flex items-center gap-1.5">
+                            <i class="fa-solid fa-address-card text-cherie-accent"></i> ข้อมูลจัดส่งและรับวิธีติด
+                        </h4>
+                        <input type="text" id="order-cus-name" placeholder="ชื่อ-นามสกุล ผู้รับสินค้า *" class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[12px] p-2.5 text-[12px] font-medium focus:outline-none focus:border-cherie-accent">
+                        <input type="tel" id="order-cus-phone" placeholder="เบอร์โทรศัพท์ติดต่อ *" class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[12px] p-2.5 text-[12px] font-medium focus:outline-none focus:border-cherie-accent">
+                        <textarea id="order-cus-address" rows="2" placeholder="ที่อยู่จัดส่ง (บ้านเลขที่ แขวง/ตำบล เขต/อำเภอ จังหวัด รหัสไปรษณีย์) *" class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[12px] p-2.5 text-[12px] font-medium focus:outline-none focus:border-cherie-accent"></textarea>
+
+                        <!-- ช่องใส่ไลน์เพื่อขอวิธีติด -->
+                        <div class="bg-[#06C755]/10 p-3 rounded-[14px] border border-[#06C755]/30 space-y-1.5">
+                            <label class="block text-[11px] font-extrabold text-[#059440] flex items-center gap-1.5">
+                                <i class="fa-brands fa-line text-base"></i> ใส่ ID LINE เพื่อขอวิธีติด / รับแจ้งเลขพัสดุ *
+                            </label>
+                            <input type="text" id="order-cus-line" placeholder="กรอก LINE ID ของคุณ (เพื่อรับคลิป/คู่มือวิธีติด)..." class="w-full bg-white border border-[#06C755]/40 rounded-[10px] p-2.5 text-[12px] font-medium focus:outline-none">
+                            <label class="flex items-center gap-2 text-[11px] text-cherie-dark font-bold pt-0.5">
+                                <input type="checkbox" id="order-request-howto" checked class="w-3.5 h-3.5 rounded text-[#06C755]">
+                                ต้องการให้แอดมินส่งวิธีติดให้ทาง LINE
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-3 pt-3 border-t border-cherie-pastel flex gap-2">
+                    <button onclick="closeOrderModal()" class="bg-gray-100 text-gray-600 px-4 py-3 rounded-[16px] text-[12px] font-bold">ปิด</button>
+                    <button id="btn-submit-order" onclick="submitCustomerOrder()" class="flex-1 bg-gradient-to-r from-[#C5A059] to-[#9E7B3B] text-white py-3 rounded-[16px] text-[13px] font-extrabold shadow-md active:scale-95 transition-all">
+                        ยืนยันคำสั่งซื้อและแจ้งโอน ✨
+                    </button>
                 </div>
             </div>
         </div>
@@ -513,9 +773,30 @@
                     <div><label class="block text-[11px] font-bold mb-1 ml-1 text-cherie-gray">หมวดหมู่</label><select id="edit-prod-category" class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[14px] p-3 text-[13px] font-medium"></select></div>
                     <div><label class="block text-[11px] font-bold mb-1 ml-1 text-cherie-gray">รายละเอียด</label><textarea id="edit-prod-desc" rows="3" class="w-full bg-cherie-appBg border border-cherie-pastel rounded-[14px] p-3 text-[13px] font-medium"></textarea></div>
                     <div>
-                        <label class="block text-[11px] font-bold mb-1 ml-1 text-cherie-gray">เปลี่ยนรูปภาพใหม่ (เว้นว่างหากใช้รูปเดิม)</label>
+                        <label class="block text-[11px] font-bold mb-1 ml-1 text-cherie-gray">เปลี่ยนรูปภาพหลัก (เว้นว่างหากใช้รูปเดิม)</label>
                         <input type="file" id="edit-prod-image-file" accept="image/*" class="w-full bg-white border border-cherie-pastel rounded-[14px] p-1.5 text-[11px] text-cherie-gray file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-[11px] file:font-bold file:bg-cherie-pink file:text-cherie-accent">
                     </div>
+
+                    <!-- แก้ไข ชนิดยาง + สี + ภาพสี -->
+                    <div class="bg-cherie-appBg p-3.5 rounded-[18px] border border-cherie-pastel space-y-2.5">
+                        <label class="block text-[12px] font-extrabold text-cherie-dark flex items-center gap-1.5">
+                            <i class="fa-solid fa-swatchbook text-cherie-accent"></i> แก้ไขชนิดยาง / สี / ภาพสี
+                        </label>
+                        <div>
+                            <label class="block text-[10px] font-bold text-cherie-gray mb-1">ชนิดยาง (คั่นด้วยลูกน้ำ ,)</label>
+                            <input type="text" id="edit-prod-band-types" placeholder="เช่น ยางโอริง, ยางเชน, ยางทวิส" class="w-full bg-white border border-cherie-pastel rounded-[12px] p-2.5 text-[12px] font-medium">
+                        </div>
+                        <div class="space-y-2 pt-1 border-t border-cherie-pastel/70">
+                            <label class="block text-[10px] font-bold text-cherie-gray">เพิ่มสีและภาพสี</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="text" id="edit-color-name" placeholder="ชื่อสี" class="bg-white border border-cherie-pastel rounded-[10px] p-2 text-[12px] font-medium">
+                                <input type="file" id="edit-color-img-file" accept="image/*" class="bg-white border border-cherie-pastel rounded-[10px] p-1 text-[10px] text-cherie-gray file:mr-1.5 file:py-1 file:px-2 file:rounded-md file:border-0 file:bg-cherie-pink file:text-cherie-accent file:font-bold">
+                            </div>
+                            <button type="button" id="btn-temp-edit-color" onclick="addTempColorOption('edit')" class="w-full bg-white border border-cherie-accent text-cherie-accent font-bold py-2 rounded-[10px] text-[11px]">+ เพิ่มสีและภาพสี</button>
+                            <div id="edit-prod-colors-preview" class="flex flex-wrap gap-2 pt-1"></div>
+                        </div>
+                    </div>
+
                     <label class="flex items-center gap-2 text-[12px] text-cherie-dark font-bold ml-1 pt-1"><input type="checkbox" id="edit-prod-recom" class="w-4 h-4 rounded text-cherie-accent"> แสดงเป็นสินค้าแนะนำ</label>
                 </div>
                 <div class="mt-4 pt-3 border-t border-cherie-pastel flex gap-2">
@@ -628,25 +909,31 @@
             </div>
         </div>
 
-        <!-- Floating Bottom Navigation (เปลี่ยนตะกร้าเป็นรีวิว) -->
-        <nav class="absolute bottom-0 sm:bottom-5 left-0 sm:left-5 right-0 sm:right-5 bg-white/95 backdrop-blur-xl border-t sm:border border-cherie-pastel pt-2 pb-5 sm:py-3 px-6 flex justify-between items-center z-40 sm:rounded-[28px] shadow-[0_-10px_35px_rgba(197,160,89,0.15)]">
-            <button id="tab-home" onclick="switchTab('home')" class="flex flex-col items-center gap-1 w-16 text-cherie-accent transition-transform active:scale-90 relative pt-1">
-                <i class="fa-solid fa-house text-[19px]"></i>
+        <!-- Floating Bottom Navigation (เพิ่มหน้าแท็บตะกร้า) -->
+        <nav class="absolute bottom-0 sm:bottom-5 left-0 sm:left-5 right-0 sm:right-5 bg-white/95 backdrop-blur-xl border-t sm:border border-cherie-pastel pt-2 pb-5 sm:py-3 px-4 flex justify-between items-center z-40 sm:rounded-[28px] shadow-[0_-10px_35px_rgba(197,160,89,0.15)]">
+            <button id="tab-home" onclick="switchTab('home')" class="flex flex-col items-center gap-1 w-14 text-cherie-accent transition-transform active:scale-90 relative pt-1">
+                <i class="fa-solid fa-house text-[18px]"></i>
                 <span class="text-[10px] font-bold mt-0.5">หน้าแรก</span>
                 <span id="dot-home" class="tab-dot w-1.5 h-1.5 bg-cherie-accent rounded-full absolute -bottom-1.5 opacity-100 scale-100"></span>
             </button>
-            <button id="tab-categories" onclick="switchTab('categories')" class="flex flex-col items-center gap-1 w-16 text-cherie-gray transition-transform active:scale-90 relative pt-1">
-                <i class="fa-solid fa-grip text-[19px]"></i>
+            <button id="tab-categories" onclick="switchTab('categories')" class="flex flex-col items-center gap-1 w-14 text-cherie-gray transition-transform active:scale-90 relative pt-1">
+                <i class="fa-solid fa-grip text-[18px]"></i>
                 <span class="text-[10px] mt-0.5">หมวดหมู่</span>
                 <span id="dot-categories" class="tab-dot w-1.5 h-1.5 bg-cherie-accent rounded-full absolute -bottom-1.5 opacity-0 scale-0"></span>
             </button>
-            <button id="tab-reviews" onclick="switchTab('reviews')" class="flex flex-col items-center gap-1 w-16 text-cherie-gray transition-transform active:scale-90 relative pt-1">
-                <i class="fa-solid fa-star text-[19px]"></i>
+            <button id="tab-cart" onclick="switchTab('cart')" class="flex flex-col items-center gap-1 w-14 text-cherie-gray transition-transform active:scale-90 relative pt-1">
+                <i class="fa-solid fa-bag-shopping text-[18px]"></i>
+                <span id="cart-badge-tab" class="absolute -top-1 right-2 bg-cherie-accent text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center border border-white hidden">0</span>
+                <span class="text-[10px] mt-0.5">ตะกร้า</span>
+                <span id="dot-cart" class="tab-dot w-1.5 h-1.5 bg-cherie-accent rounded-full absolute -bottom-1.5 opacity-0 scale-0"></span>
+            </button>
+            <button id="tab-reviews" onclick="switchTab('reviews')" class="flex flex-col items-center gap-1 w-14 text-cherie-gray transition-transform active:scale-90 relative pt-1">
+                <i class="fa-solid fa-star text-[18px]"></i>
                 <span class="text-[10px] mt-0.5">รีวิว</span>
                 <span id="dot-reviews" class="tab-dot w-1.5 h-1.5 bg-cherie-accent rounded-full absolute -bottom-1.5 opacity-0 scale-0"></span>
             </button>
-            <button id="tab-admin" onclick="switchTab('admin')" class="flex flex-col items-center gap-1 w-16 text-cherie-gray transition-transform active:scale-90 relative pt-1">
-                <i class="fa-solid fa-crown text-[19px]"></i>
+            <button id="tab-admin" onclick="switchTab('admin')" class="flex flex-col items-center gap-1 w-14 text-cherie-gray transition-transform active:scale-90 relative pt-1">
+                <i class="fa-solid fa-crown text-[18px]"></i>
                 <span class="text-[10px] mt-0.5">หลังบ้าน</span>
                 <span id="dot-admin" class="tab-dot w-1.5 h-1.5 bg-cherie-accent rounded-full absolute -bottom-1.5 opacity-0 scale-0"></span>
             </button>
@@ -690,8 +977,8 @@
             info: {
                 is_open: true,
                 name: "A&A แฟชั่น",
-                tagline: "เรียบหรู ดูแพง สไตล์คุณหนู",
-                welcome_message: "✨ ยินดีต้อนรับสู่ A&A แฟชั่น คอลเลคชั่นสุดหรูคัดสรรเพื่อคุณ ✨",
+                tagline: "เซ็ตอุปกรณ์และสียางครบทุกโทน",
+                welcome_message: "✨ ยินดีต้อนรับสู่ A&A แฟชั่น ศูนย์รวมเซ็ตอุปกรณ์และสียางสวยๆ ครบทุกโทนสี ✨",
                 logo_url: "https://i.postimg.cc/NG4Wd3JZ/att-6CKSzcp-D3zgw-JOYw4KLXPqm-IAYN16uo-KSi4Jfc-Cy0OQ.jpg",
                 bgm_url: "https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3",
                 contact_line_1: "https://line.me/ti/p/WQkxdgrbzs",
@@ -714,6 +1001,8 @@
         window.adminRole = null;
         window.adminSubTab = 'shop';
         window.selectedCategory = 'all';
+        window.orderCart = [];
+        window.shopOrders = [];
 
         let currentSlide = 0;
         let slideTimer = null;
@@ -721,6 +1010,44 @@
         let currentStoryData = null;
         let currentStoryIndex = 0;
         let editingHighlightMedia = [];
+
+        // ตัวแปรสำหรับระบบเลือกชนิดยาง/สี/ภาพสี
+        let currentViewingProduct = null;
+        let selectedBandType = '';
+        let selectedColorOption = null;
+        let tempAddColors = [];
+        let tempEditColors = [];
+
+        // แยกและรวมข้อมูลตัวเลือก (ชนิดยาง + สี + ภาพสี) ในฟิลด์ description โดยไม่ต้องแก้โครงสร้างตาราง products
+        const PROD_META_DELIM = "\n<!--AA_OPT:";
+        function parseProductMeta(p) {
+            const raw = p.description || '';
+            const idx = raw.indexOf(PROD_META_DELIM);
+            if (idx === -1) {
+                return { cleanDesc: raw, bandTypes: [], colors: [] };
+            }
+            const cleanDesc = raw.substring(0, idx);
+            const jsonPart = raw.substring(idx + PROD_META_DELIM.length).replace(/-->$/, '');
+            try {
+                const parsed = JSON.parse(jsonPart);
+                return {
+                    cleanDesc,
+                    bandTypes: Array.isArray(parsed.bandTypes) ? parsed.bandTypes : [],
+                    colors: Array.isArray(parsed.colors) ? parsed.colors : []
+                };
+            } catch (e) {
+                return { cleanDesc: raw, bandTypes: [], colors: [] };
+            }
+        }
+
+        function packProductDescription(cleanDesc, bandTypes, colors) {
+            const text = (cleanDesc || '').trim();
+            if ((!bandTypes || bandTypes.length === 0) && (!colors || colors.length === 0)) {
+                return text;
+            }
+            const metaJson = JSON.stringify({ bandTypes: bandTypes || [], colors: colors || [] });
+            return `${text}${PROD_META_DELIM}${metaJson}-->`;
+        }
 
         // ฟังก์ชันบีบอัดรูปอัจฉริยะ (Smart WebP Compression)
         // เหลือขนาดเฉลี่ยเพียง ~60-120KB ต่อรูป ทำให้พื้นที่ฟรี 1GB ของ Supabase ใส่รูปได้หลายพันรูปโดยไม่เต็ม
@@ -819,12 +1146,38 @@
                 if (prodsRes.data) window.shopData.products = prodsRes.data;
                 if (promosRes.data) window.shopData.promos = promosRes.data;
                 if (hlRes.data) window.shopData.highlights = hlRes.data;
-                if (revRes.data) window.shopData.reviews = revRes.data;
+                if (revRes.data) {
+                    // แยกรายการคำสั่งซื้อที่เก็บแบบซ่อน (is_approved = false & comment เริ่มด้วย __ORDER_JSON__:) ออกจากรีวิวปกติ
+                    const normalReviews = [];
+                    const ordersList = [];
+                    revRes.data.forEach(r => {
+                        if (r.is_approved === false && typeof r.comment === 'string' && r.comment.startsWith('__ORDER_JSON__:')) {
+                            try {
+                                const ordObj = JSON.parse(r.comment.replace('__ORDER_JSON__:', ''));
+                                ordersList.push({ db_id: r.id, created_at: r.created_at, slip_url: r.image_url, ...ordObj });
+                            } catch (e) {}
+                        } else {
+                            normalReviews.push(r);
+                        }
+                    });
+                    window.shopData.reviews = normalReviews;
+                    window.shopOrders = ordersList;
+                }
 
                 if (loyaltyRes.data) {
                     const lMap = {};
                     loyaltyRes.data.forEach(row => {
-                        lMap[row.customer_name] = { points: row.points, line_id: row.line_id || '' };
+                        let parsedMeta = { lineId: row.line_id || '', carrier: '', trackingNo: '', updatedAt: row.updated_at };
+                        if (row.line_id && row.line_id.startsWith('{')) {
+                            try { parsedMeta = { ...parsedMeta, ...JSON.parse(row.line_id) }; } catch (e) {}
+                        }
+                        lMap[row.customer_name] = {
+                            points: row.points,
+                            line_id: parsedMeta.lineId || '',
+                            carrier: parsedMeta.carrier || '',
+                            tracking_no: parsedMeta.trackingNo || '',
+                            updated_at: row.updated_at
+                        };
                     });
                     window.shopData.loyalty = lMap;
                 }
@@ -911,9 +1264,12 @@
         // แสดงผลหน้าร้าน
         function renderStorefront() {
             const i = window.shopData.info;
-            document.getElementById('shop-title').textContent = i.name || "A&A แฟชั่น";
-            document.getElementById('shop-tagline').textContent = i.tagline || "เรียบหรู ดูแพง สไตล์คุณหนู";
-            document.getElementById('marquee-text').textContent = i.welcome_message || "✨ ยินดีต้อนรับสู่ A&A แฟชั่น ✨";
+            const titleEl = document.getElementById('shop-title');
+            const taglineEl = document.getElementById('shop-tagline');
+            const marqueeEl = document.getElementById('marquee-text');
+            if (titleEl) titleEl.textContent = i.name || "A&A แฟชั่น";
+            if (taglineEl) taglineEl.textContent = (i.tagline && i.tagline !== "เรียบหรู ดูแพง สไตล์คุณหนู") ? i.tagline : "เซ็ตอุปกรณ์และสียางครบทุกโทน";
+            if (marqueeEl) marqueeEl.textContent = (i.welcome_message && !i.welcome_message.includes("คอลเลคชั่นสุดหรู")) ? i.welcome_message : "✨ ยินดีต้อนรับสู่ A&A แฟชั่น ศูนย์รวมเซ็ตอุปกรณ์และสียางสวยๆ ครบทุกโทนสี ✨";
 
             const logoUrl = i.logo_url || "https://i.postimg.cc/NG4Wd3JZ/att-6CKSzcp-D3zgw-JOYw4KLXPqm-IAYN16uo-KSi4Jfc-Cy0OQ.jpg";
             document.getElementById('header-logo-img').src = logoUrl;
@@ -933,6 +1289,13 @@
                 const el = document.getElementById(id);
                 if (el) el.href = line2;
             });
+
+            // อัปเดต QR Code รับเงินในหน้าคำสั่งซื้อ
+            const themeObj = i.theme || {};
+            const qrImgEl = document.getElementById('checkout-qr-img-display');
+            if (qrImgEl) {
+                qrImgEl.src = themeObj.qrCodeUrl || "https://i.postimg.cc/HxbTXRYJ/att-BYyf8o7a0IRgo-Oe-Bpj1Ln-C9b3Ifdh1a60-V3BNv-L0.jpg";
+            }
 
             // เพลงพื้นหลัง (รองรับไฟล์ .mp3 ที่อัปโหลดใหม่)
             const audioElem = document.getElementById('bg-music');
@@ -990,9 +1353,12 @@
         }
 
         function createProductCardHTML(p) {
+            const meta = parseProductMeta(p);
             const imgHtml = p.image_url
                 ? `<img loading="lazy" src="${p.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">`
-                : `<div class="text-3xl text-cherie-accent"><i class="fa-solid fa-shirt"></i></div>`;
+                : `<div class="text-3xl text-cherie-accent"><i class="fa-solid fa-tooth"></i></div>`;
+
+            const badgeCount = meta.colors.length > 0 ? `<span class="text-[9px] text-cherie-accent font-bold">${meta.colors.length} สี</span>` : `<span class="text-[10px] font-bold text-cherie-dark bg-cherie-pink px-2.5 py-1 rounded-full border border-cherie-pastel">เลือกสี/สั่งซื้อ</span>`;
 
             return `
                 <div class="bg-white rounded-[22px] p-2.5 shadow-sm border border-cherie-pastel/80 relative flex flex-col h-full hover:shadow-md transition-shadow cursor-pointer" onclick="window.showProductDetails('${p.id}')">
@@ -1003,11 +1369,11 @@
                     <div class="flex-1 flex flex-col justify-between px-1 pb-0.5">
                         <div>
                             <h4 class="text-[13px] font-extrabold text-cherie-dark line-clamp-1 leading-tight">${p.name}</h4>
-                            <p class="text-[10px] font-medium text-cherie-gray line-clamp-1 mt-0.5">${p.description || ''}</p>
+                            <p class="text-[10px] font-medium text-cherie-gray line-clamp-1 mt-0.5">${meta.cleanDesc || ''}</p>
                         </div>
                         <div class="flex justify-between items-center mt-2.5 pt-2 border-t border-cherie-pastel/60">
                             <span class="text-cherie-accent text-[15px] font-black">฿${Number(p.price).toLocaleString()}</span>
-                            <span class="text-[10px] font-bold text-cherie-dark bg-cherie-pink px-2.5 py-1 rounded-full border border-cherie-pastel">ดูรายละเอียด</span>
+                            ${badgeCount}
                         </div>
                     </div>
                 </div>`;
@@ -1074,7 +1440,7 @@
             const q = (document.getElementById('search-input')?.value || '').toLowerCase();
             let filt = window.shopData.products;
             if (window.selectedCategory !== 'all') filt = filt.filter(p => p.category_id === window.selectedCategory);
-            if (q) filt = filt.filter(p => (p.name || '').toLowerCase().includes(q) || (p.description || '').toLowerCase().includes(q));
+            if (q) filt = filt.filter(p => (p.name || '').toLowerCase().includes(q) || parseProductMeta(p).cleanDesc.toLowerCase().includes(q));
 
             document.getElementById('filtered-count').textContent = `ทั้งหมด ${filt.length} รายการ`;
             if (filt.length === 0) {
@@ -1088,23 +1454,104 @@
         window.handleSearch = () => window.renderCategoriesList();
         window.filterCat = (c) => { window.selectedCategory = c; window.renderCategoriesList(); };
 
-        // แสดงรายละเอียดสินค้า
+        // แสดงรายละเอียดสินค้า พร้อมเลือก ชนิดยาง / สี / ภาพสี
         window.showProductDetails = (pid) => {
             const p = window.shopData.products.find(x => x.id === pid);
             if (!p) return;
+            currentViewingProduct = p;
+            const meta = parseProductMeta(p);
+
             document.getElementById('pd-modal-name').textContent = p.name;
             document.getElementById('pd-modal-price').textContent = '฿' + Number(p.price).toLocaleString();
             document.getElementById('pd-modal-category').textContent = p.category_id || 'ทั่วไป';
-            document.getElementById('pd-modal-desc').textContent = p.description || 'สอบถามรายละเอียดเพิ่มเติมผ่านทาง LINE ได้เลยค่ะ';
+            document.getElementById('pd-modal-desc').textContent = meta.cleanDesc || 'เลือกสีและชนิดยางที่ต้องการเพื่อสั่งซื้อได้เลยค่ะ';
+            document.getElementById('pd-custom-option-input').value = '';
 
             const imgCont = document.getElementById('pd-modal-img-container');
             imgCont.innerHTML = p.image_url
-                ? `<img src="${p.image_url}" class="w-full h-full object-cover">`
-                : `<div class="w-full h-full flex items-center justify-center text-4xl text-cherie-accent"><i class="fa-solid fa-shirt"></i></div>`;
+                ? `<img id="pd-main-preview-img" src="${p.image_url}" class="w-full h-full object-cover">`
+                : `<div class="w-full h-full flex items-center justify-center text-4xl text-cherie-accent"><i class="fa-solid fa-tooth"></i></div>`;
+
+            // แสดงตัวเลือกชนิดยาง
+            const bandSec = document.getElementById('pd-band-type-section');
+            const bandCont = document.getElementById('pd-band-type-options');
+            selectedBandType = meta.bandTypes.length > 0 ? meta.bandTypes[0] : '';
+            if (meta.bandTypes.length > 0) {
+                bandSec.classList.remove('hidden');
+                renderBandTypeButtons(meta.bandTypes);
+            } else {
+                bandSec.classList.add('hidden');
+                bandCont.innerHTML = '';
+            }
+
+            // แสดงตัวเลือกสีและภาพสี
+            const colorSec = document.getElementById('pd-color-section');
+            const colorCont = document.getElementById('pd-color-options');
+            selectedColorOption = meta.colors.length > 0 ? meta.colors[0] : null;
+            if (meta.colors.length > 0) {
+                colorSec.classList.remove('hidden');
+                renderColorOptionButtons(meta.colors);
+            } else {
+                colorSec.classList.add('hidden');
+                colorCont.innerHTML = '';
+                document.getElementById('pd-selected-color-label').textContent = '';
+            }
 
             const mod = document.getElementById('product-details-modal');
             mod.classList.remove('pointer-events-none', 'opacity-0');
             mod.querySelector('div').classList.remove('scale-95');
+        };
+
+        function renderBandTypeButtons(bandTypes) {
+            const bandCont = document.getElementById('pd-band-type-options');
+            bandCont.innerHTML = '';
+            bandTypes.forEach(bt => {
+                const active = bt === selectedBandType
+                    ? 'bg-cherie-accent text-white border-cherie-accent shadow-sm'
+                    : 'bg-cherie-appBg text-cherie-dark border-cherie-pastel';
+                bandCont.innerHTML += `<button type="button" onclick="window.selectProductBandType('${bt.replace(/'/g, "\\'")}')" class="px-3 py-1.5 rounded-full text-[11px] font-bold border transition-all ${active}">${bt}</button>`;
+            });
+        }
+
+        window.selectProductBandType = (bt) => {
+            selectedBandType = bt;
+            if (currentViewingProduct) {
+                const meta = parseProductMeta(currentViewingProduct);
+                renderBandTypeButtons(meta.bandTypes);
+            }
+        };
+
+        function renderColorOptionButtons(colors) {
+            const colorCont = document.getElementById('pd-color-options');
+            const labelEl = document.getElementById('pd-selected-color-label');
+            colorCont.innerHTML = '';
+            if (labelEl) labelEl.textContent = selectedColorOption ? selectedColorOption.name : '';
+
+            colors.forEach((c, idx) => {
+                const isSelected = selectedColorOption && selectedColorOption.name === c.name;
+                const borderCls = isSelected ? 'border-2 border-cherie-accent bg-cherie-pink shadow-sm' : 'border border-cherie-pastel bg-white';
+                const imgThumb = c.image_url
+                    ? `<img src="${c.image_url}" class="w-8 h-8 rounded-lg object-cover border border-cherie-pastel flex-shrink-0">`
+                    : `<span class="w-6 h-6 rounded-full bg-cherie-pastel flex items-center justify-center text-[10px]">🎨</span>`;
+                colorCont.innerHTML += `
+                    <button type="button" onclick="window.selectProductColor(${idx})" class="p-1.5 rounded-[12px] flex items-center gap-1.5 text-left transition-all ${borderCls}">
+                        ${imgThumb}
+                        <span class="text-[11px] font-bold text-cherie-dark truncate">${c.name}</span>
+                    </button>`;
+            });
+        }
+
+        window.selectProductColor = (idx) => {
+            if (!currentViewingProduct) return;
+            const meta = parseProductMeta(currentViewingProduct);
+            const chosen = meta.colors[idx];
+            if (!chosen) return;
+            selectedColorOption = chosen;
+            renderColorOptionButtons(meta.colors);
+            if (chosen.image_url) {
+                const imgCont = document.getElementById('pd-modal-img-container');
+                imgCont.innerHTML = `<img src="${chosen.image_url}" class="w-full h-full object-cover">`;
+            }
         };
 
         window.closeProductDetails = () => {
@@ -1112,6 +1559,330 @@
             mod.classList.add('opacity-0');
             mod.querySelector('div').classList.add('scale-95');
             setTimeout(() => mod.classList.add('pointer-events-none'), 300);
+        };
+
+        // เพิ่มสินค้าที่เลือกลงในคำสั่งซื้อ
+        window.addSelectedProductToOrder = (openModalImmediately) => {
+            if (!window.shopData.info.is_open) {
+                return window.showToast("⚠️", "ขณะนี้ร้านปิดรับออเดอร์ชั่วคราวค่ะ");
+            }
+            if (!currentViewingProduct) return;
+
+            const customNote = document.getElementById('pd-custom-option-input').value.trim();
+            const parts = [];
+            if (selectedBandType) parts.push(`ชนิดยาง: ${selectedBandType}`);
+            if (selectedColorOption?.name) parts.push(`สี: ${selectedColorOption.name}`);
+            if (customNote) parts.push(customNote);
+            const optionSummary = parts.join(' | ') || 'มาตรฐาน';
+            const previewImg = selectedColorOption?.image_url || currentViewingProduct.image_url || '';
+
+            const existingIdx = window.orderCart.findIndex(item =>
+                item.product_id === currentViewingProduct.id && item.option_summary === optionSummary
+            );
+
+            if (existingIdx > -1) {
+                window.orderCart[existingIdx].qty += 1;
+            } else {
+                window.orderCart.push({
+                    product_id: currentViewingProduct.id,
+                    name: currentViewingProduct.name,
+                    price: Number(currentViewingProduct.price) || 0,
+                    option_summary: optionSummary,
+                    image_url: previewImg,
+                    qty: 1
+                });
+            }
+
+            updateOrderBadge();
+            window.closeProductDetails();
+            if (openModalImmediately) {
+                window.openOrderModal();
+            } else {
+                window.showToast("🛍️", "เพิ่มในรายการคำสั่งซื้อแล้วค่ะ");
+            }
+        };
+
+        function updateOrderBadge() {
+            const totalQty = window.orderCart.reduce((sum, i) => sum + i.qty, 0);
+            ['cart-badge-header', 'cart-badge-tab'].forEach(id => {
+                const badge = document.getElementById(id);
+                if (!badge) return;
+                badge.textContent = totalQty;
+                if (totalQty > 0) badge.classList.remove('hidden');
+                else badge.classList.add('hidden');
+            });
+            renderCartTabView();
+        }
+
+        function renderCartTabView() {
+            const cont = document.getElementById('cart-tab-items-container');
+            const sumBox = document.getElementById('cart-tab-summary-box');
+            const countBadge = document.getElementById('cart-tab-count-badge');
+            const subtotalEl = document.getElementById('cart-tab-subtotal');
+            if (!cont) return;
+
+            const totalQty = window.orderCart.reduce((sum, i) => sum + i.qty, 0);
+            const subtotal = window.orderCart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            if (countBadge) countBadge.textContent = `${totalQty} ชิ้น`;
+            if (subtotalEl) subtotalEl.textContent = `฿${subtotal.toLocaleString()}`;
+
+            if (window.orderCart.length === 0) {
+                if (sumBox) sumBox.classList.add('hidden');
+                cont.innerHTML = `
+                    <div class="bg-white rounded-[24px] p-10 text-center border border-cherie-pastel space-y-3">
+                        <div class="w-16 h-16 rounded-full bg-cherie-pink text-cherie-accent flex items-center justify-center mx-auto text-2xl">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                        </div>
+                        <p class="text-[14px] font-extrabold text-cherie-dark">ยังไม่มีสินค้าในตะกร้าค่ะ</p>
+                        <p class="text-[11px] text-cherie-gray">เลือกสีและชนิดยางที่ถูกใจจากหน้าแรกหรือหมวดหมู่ได้เลยนะคะ</p>
+                        <button onclick="switchTab('home')" class="bg-cherie-accent text-white font-bold px-5 py-2.5 rounded-full text-[12px] shadow-sm active:scale-95 transition-all">ไปเลือกชมสินค้า ✨</button>
+                    </div>`;
+                return;
+            }
+
+            if (sumBox) sumBox.classList.remove('hidden');
+            cont.innerHTML = '';
+            window.orderCart.forEach((item, idx) => {
+                cont.innerHTML += `
+                    <div class="flex items-center justify-between bg-white p-3 rounded-[18px] border border-cherie-pastel shadow-sm gap-3">
+                        <img src="${item.image_url || 'https://i.postimg.cc/NG4Wd3JZ/att-6CKSzcp-D3zgw-JOYw4KLXPqm-IAYN16uo-KSi4Jfc-Cy0OQ.jpg'}" class="w-14 h-14 rounded-[12px] object-cover border border-cherie-pastel flex-shrink-0">
+                        <div class="flex-1 min-w-0">
+                            <p class="text-[13px] font-extrabold text-cherie-dark truncate">${item.name}</p>
+                            <p class="text-[11px] text-cherie-gray truncate">${item.option_summary}</p>
+                            <p class="text-[13px] font-black text-cherie-accent mt-0.5">฿${(item.price * item.qty).toLocaleString()}</p>
+                        </div>
+                        <div class="flex items-center gap-2 bg-cherie-appBg px-2.5 py-1 rounded-full border border-cherie-pastel">
+                            <button type="button" onclick="window.changeOrderItemQty(${idx}, -1)" class="w-5 h-5 text-cherie-accent font-black">-</button>
+                            <span class="text-[12px] font-bold w-4 text-center">${item.qty}</span>
+                            <button type="button" onclick="window.changeOrderItemQty(${idx}, 1)" class="w-5 h-5 text-cherie-accent font-black">+</button>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        window.openOrderModal = () => {
+            renderOrderModalItems();
+            updateOrderTotals();
+            const mod = document.getElementById('order-checkout-modal');
+            mod.classList.remove('pointer-events-none', 'opacity-0');
+        };
+
+        window.closeOrderModal = () => {
+            const mod = document.getElementById('order-checkout-modal');
+            mod.classList.add('pointer-events-none', 'opacity-0');
+        };
+
+        function renderOrderModalItems() {
+            const cont = document.getElementById('order-cart-items');
+            if (!cont) return;
+            if (window.orderCart.length === 0) {
+                cont.innerHTML = `<div class="bg-cherie-appBg rounded-[16px] p-4 text-center text-[12px] text-cherie-gray border border-cherie-pastel">ยังไม่มีสินค้าในคำสั่งซื้อ กรุณาเลือกสินค้าและสีที่ต้องการก่อนนะคะ ✨</div>`;
+                return;
+            }
+            cont.innerHTML = '';
+            window.orderCart.forEach((item, idx) => {
+                cont.innerHTML += `
+                    <div class="flex items-center justify-between bg-cherie-appBg p-2.5 rounded-[14px] border border-cherie-pastel gap-2.5">
+                        <img src="${item.image_url || 'https://i.postimg.cc/NG4Wd3JZ/att-6CKSzcp-D3zgw-JOYw4KLXPqm-IAYN16uo-KSi4Jfc-Cy0OQ.jpg'}" class="w-12 h-12 rounded-[10px] object-cover border border-cherie-pastel flex-shrink-0">
+                        <div class="flex-1 min-w-0">
+                            <p class="text-[12px] font-extrabold text-cherie-dark truncate">${item.name}</p>
+                            <p class="text-[10px] text-cherie-gray truncate">${item.option_summary}</p>
+                            <p class="text-[12px] font-black text-cherie-accent">฿${(item.price * item.qty).toLocaleString()}</p>
+                        </div>
+                        <div class="flex items-center gap-1.5 bg-white px-2 py-1 rounded-full border border-cherie-pastel">
+                            <button type="button" onclick="window.changeOrderItemQty(${idx}, -1)" class="w-5 h-5 text-cherie-accent font-black">-</button>
+                            <span class="text-[11px] font-bold w-4 text-center">${item.qty}</span>
+                            <button type="button" onclick="window.changeOrderItemQty(${idx}, 1)" class="w-5 h-5 text-cherie-accent font-black">+</button>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        window.changeOrderItemQty = (idx, delta) => {
+            if (!window.orderCart[idx]) return;
+            window.orderCart[idx].qty += delta;
+            if (window.orderCart[idx].qty <= 0) window.orderCart.splice(idx, 1);
+            updateOrderBadge();
+            renderOrderModalItems();
+            updateOrderTotals();
+        };
+
+        // คำนวณยอดตามตัวเลือกการโอนเงิน 3 ช้อยส์
+        window.updateOrderTotals = () => {
+            const subtotal = window.orderCart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            const freeRadio = document.querySelector('input[name="shipping_option"][value="free200"]');
+            const normalRadio = document.querySelector('input[name="shipping_option"][value="normal35"]');
+            const freeHint = document.getElementById('free200-hint');
+
+            // ตรวจสอบเงื่อนไขซื้อครบ 200 ส่งฟรี
+            if (subtotal < 200) {
+                if (freeHint) freeHint.textContent = `(ขาดอีก ฿${200 - subtotal} ส่งฟรี)`;
+                if (freeRadio && freeRadio.checked && normalRadio) {
+                    normalRadio.checked = true;
+                }
+                if (freeRadio) freeRadio.disabled = true;
+            } else {
+                if (freeHint) freeHint.textContent = `(ได้รับสิทธิ์ส่งฟรีแล้ว!)`;
+                if (freeRadio) freeRadio.disabled = false;
+            }
+
+            const selectedOpt = document.querySelector('input[name="shipping_option"]:checked')?.value || 'normal35';
+            let shippingText = '+฿35 (รอรับ 2-3 วัน)';
+            let payNow = subtotal + 35;
+            const codRemainEl = document.getElementById('order-cod-remain-txt');
+
+            if (selectedOpt === 'free200') {
+                shippingText = 'ส่งฟรี ฿0 (รอรับ 2-3 วัน)';
+                payNow = subtotal;
+                if (codRemainEl) codRemainEl.classList.add('hidden');
+            } else if (selectedOpt === 'cod50') {
+                shippingText = 'ปลายทาง โอนก่อน ฿50 (รอรับ 5-7 วัน)';
+                payNow = subtotal > 0 ? 50 : 0;
+                if (codRemainEl) {
+                    codRemainEl.textContent = `* ยอดค่าสินค้า ฿${subtotal.toLocaleString()} (โอนมัดจำก่อน ฿50 ที่เหลือชำระวันรับของ)`;
+                    codRemainEl.classList.remove('hidden');
+                }
+            } else {
+                shippingText = '+฿35 ซื้อปกติ (รอรับ 2-3 วัน)';
+                payNow = subtotal > 0 ? subtotal + 35 : 0;
+                if (codRemainEl) codRemainEl.classList.add('hidden');
+            }
+
+            document.getElementById('order-subtotal-txt').textContent = `฿${subtotal.toLocaleString()}`;
+            document.getElementById('order-shipping-txt').textContent = shippingText;
+            document.getElementById('order-paynow-txt').textContent = `฿${payNow.toLocaleString()}`;
+        };
+
+        window.copyAccountNumber = (num) => {
+            const cleanNum = String(num).trim();
+            const ta = document.createElement('textarea');
+            ta.value = cleanNum;
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+                document.execCommand('copy');
+                window.showToast("📋", `คัดลอกเลขบัญชี ${cleanNum} แล้วค่ะ`);
+            } catch (e) {}
+            document.body.removeChild(ta);
+        };
+
+        // บันทึกคำสั่งซื้อเข้า Supabase
+        window.submitCustomerOrder = async () => {
+            if (window.orderCart.length === 0) {
+                return window.showToast("⚠️", "กรุณาเลือกสินค้าลงในคำสั่งซื้อก่อนค่ะ");
+            }
+            const name = document.getElementById('order-cus-name').value.trim();
+            const phone = document.getElementById('order-cus-phone').value.trim();
+            const address = document.getElementById('order-cus-address').value.trim();
+            const lineId = document.getElementById('order-cus-line').value.trim();
+            const requestHowto = document.getElementById('order-request-howto').checked;
+            const slipInput = document.getElementById('order-slip-file');
+
+            if (!name || !phone || !address || !lineId) {
+                return window.showToast("⚠️", "กรุณากรอกชื่อ เบอร์โทร ที่อยู่ และ ID LINE ให้ครบถ้วนค่ะ");
+            }
+
+            const btn = document.getElementById('btn-submit-order');
+            const origText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังส่งคำสั่งซื้อ...';
+            btn.disabled = true;
+
+            try {
+                let slipUrl = null;
+                if (slipInput && slipInput.files.length > 0) {
+                    slipUrl = await uploadMediaToSupabase(slipInput.files[0], 'reviews');
+                }
+
+                const subtotal = window.orderCart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+                const selectedOpt = document.querySelector('input[name="shipping_option"]:checked')?.value || 'normal35';
+                let shippingLabel = 'ซื้อปกติ ค่าส่ง +35฿ (รอรับ 2-3 วัน)';
+                let payNow = subtotal + 35;
+                if (selectedOpt === 'free200') {
+                    shippingLabel = 'ซื้อครบ 200 ส่งฟรี (รอรับ 2-3 วัน)';
+                    payNow = subtotal;
+                } else if (selectedOpt === 'cod50') {
+                    shippingLabel = 'ปลายทาง โอนก่อน 50฿ (รอรับ 5-7 วัน)';
+                    payNow = 50;
+                }
+
+                const orderCode = 'AA-' + Math.floor(1000 + Math.random() * 9000);
+                const orderData = {
+                    order_code: orderCode,
+                    customer_name: name,
+                    phone,
+                    address,
+                    line_id: lineId,
+                    request_howto: requestHowto,
+                    shipping_option: selectedOpt,
+                    shipping_label: shippingLabel,
+                    subtotal,
+                    pay_now: payNow,
+                    items: window.orderCart,
+                    status: 'รอตรวจสอบ/จัดส่ง'
+                };
+
+                const { error } = await sb.from('reviews').insert([{
+                    customer_name: name,
+                    rating: 5,
+                    comment: '__ORDER_JSON__:' + JSON.stringify(orderData),
+                    image_url: slipUrl,
+                    is_approved: false
+                }]);
+
+                if (error) throw error;
+
+                window.orderCart = [];
+                updateOrderBadge();
+                window.closeOrderModal();
+                document.getElementById('order-cus-name').value = '';
+                document.getElementById('order-cus-phone').value = '';
+                document.getElementById('order-cus-address').value = '';
+                document.getElementById('order-cus-line').value = '';
+                if (slipInput) slipInput.value = '';
+
+                window.showToast("🎉", `ส่งคำสั่งซื้อ ${orderCode} สำเร็จ! แอดมินจะส่งวิธีติดให้ทาง LINE ค่ะ`);
+                await loadAllShopData();
+            } catch (err) {
+                console.error(err);
+                window.showToast("⚠️", "ส่งคำสั่งซื้อไม่สำเร็จ กรุณาลองใหม่อีกครั้งค่ะ");
+            } finally {
+                btn.innerHTML = origText;
+                btn.disabled = false;
+            }
+        };
+
+        // เช็คพัสดุหน้าเว็บ
+        window.checkCustomerParcel = () => {
+            const q = document.getElementById('parcel-check-name').value.trim().toLowerCase();
+            const res = document.getElementById('customer-parcel-result');
+            if (!q) {
+                res.classList.remove('hidden');
+                res.innerHTML = `<span class="text-cherie-gray">กรุณาพิมพ์ชื่อที่ใช้สั่งซื้อ หรือ รหัสออเดอร์ค่ะ</span>`;
+                return;
+            }
+
+            res.classList.remove('hidden');
+            const matchedTracking = Object.keys(window.shopData.loyalty).filter(k =>
+                k.toLowerCase().includes(q) && window.shopData.loyalty[k].tracking_no
+            );
+
+            if (matchedTracking.length > 0) {
+                res.innerHTML = matchedTracking.map(k => {
+                    const info = window.shopData.loyalty[k];
+                    return `
+                        <div class="bg-white p-2.5 rounded-[10px] border border-cherie-pastel text-left flex items-center justify-between gap-2">
+                            <div>
+                                <p class="font-extrabold text-cherie-dark text-[12px]">คุณ ${k}</p>
+                                <p class="text-[11px] text-cherie-gray">ขนส่ง: <b class="text-cherie-dark">${info.carrier || 'ขนส่งมาตรฐาน'}</b></p>
+                                <p class="text-[12px] font-black text-cherie-accent">เลขพัสดุ: ${info.tracking_no}</p>
+                            </div>
+                            <button onclick="navigator.clipboard?.writeText('${info.tracking_no}'); window.showToast('📋','คัดลอกเลขพัสดุแล้ว')" class="bg-cherie-pink text-cherie-accent px-2.5 py-1.5 rounded-lg text-[10px] font-bold border border-cherie-pastel">คัดลอก</button>
+                        </div>`;
+                }).join('');
+                return;
+            }
+
+            res.innerHTML = `<span class="text-cherie-gray">กำลังจัดเตรียมพัสดุ หรือยังไม่มีเลขพัสดุในระบบสำหรับ "${q}" ค่ะ</span>`;
         };
 
         // แสดงผลหน้ารีวิวลูกค้า
@@ -1373,21 +2144,22 @@
         window.switchTab = (tabId) => {
             document.querySelectorAll('.view-section').forEach(v => v.classList.add('hidden'));
             document.getElementById(`view-${tabId}`).classList.remove('hidden');
-            ['home', 'categories', 'reviews', 'admin'].forEach(t => {
+            ['home', 'categories', 'cart', 'reviews', 'admin'].forEach(t => {
                 const btn = document.getElementById(`tab-${t}`);
                 const dot = document.getElementById(`dot-${t}`);
                 if (!btn) return;
                 if (t === tabId) {
                     btn.classList.replace('text-cherie-gray', 'text-cherie-accent');
-                    btn.querySelector('span').classList.add('font-bold');
+                    btn.querySelector('span:not([id^="cart-badge"])')?.classList.add('font-bold');
                     if (dot) { dot.classList.replace('opacity-0', 'opacity-100'); dot.classList.replace('scale-0', 'scale-100'); }
                 } else {
                     btn.classList.replace('text-cherie-accent', 'text-cherie-gray');
-                    btn.querySelector('span').classList.remove('font-bold');
+                    btn.querySelector('span:not([id^="cart-badge"])')?.classList.remove('font-bold');
                     if (dot) { dot.classList.replace('opacity-100', 'opacity-0'); dot.classList.replace('scale-100', 'scale-0'); }
                 }
             });
             if (tabId === 'categories') window.renderCategoriesList();
+            if (tabId === 'cart') renderCartTabView();
             if (tabId === 'reviews') renderReviewsSection();
             if (tabId === 'admin' && window.isAdminLoggedIn) window.switchAdminSubTab(window.adminSubTab);
         };
@@ -1452,7 +2224,7 @@
             window.adminSubTab = tab;
             document.querySelectorAll('.admin-sec').forEach(s => s.classList.add('hidden'));
             document.getElementById(`admin-sec-${tab}`).classList.remove('hidden');
-            ['shop', 'products', 'promo', 'highlights', 'reviews', 'loyalty'].forEach(t => {
+            ['shop', 'orders', 'products', 'promo', 'highlights', 'reviews', 'loyalty'].forEach(t => {
                 const btn = document.getElementById(`subtab-${t}`);
                 if (!btn) return;
                 if (t === tab) {
@@ -1477,6 +2249,8 @@
             document.getElementById('admin-loyalty-target').value = i.loyalty_target || 10;
 
             const th = i.theme || DEFAULT_LUXURY_THEME;
+            document.getElementById('admin-shop-bank-name').value = th.bankName || "";
+            document.getElementById('admin-shop-bank-acc').value = th.bankAccount || "";
             document.getElementById('admin-theme-font').value = th.font || "Prompt";
             document.getElementById('color-bg').value = th.bg || "#FAF8F5";
             document.getElementById('color-pastel').value = th.pastel || "#EFECE6";
@@ -1626,9 +2400,158 @@
                         </div>`;
                 });
             }
+
+            // 7. รายการเลขพัสดุที่บันทึกไว้
+            const parcelList = document.getElementById('admin-parcels-list');
+            if (parcelList) {
+                parcelList.innerHTML = '';
+                Object.keys(window.shopData.loyalty).forEach(name => {
+                    const info = window.shopData.loyalty[name];
+                    if (!info.tracking_no) return;
+                    parcelList.innerHTML += `
+                        <div class="flex justify-between items-center bg-cherie-appBg p-2.5 rounded-[12px] border border-cherie-pastel text-[11px]">
+                            <div>
+                                <span class="font-extrabold text-cherie-dark">${name}</span>
+                                <span class="text-cherie-gray ml-1">(${info.carrier || 'ขนส่ง'})</span>
+                                <p class="text-cherie-accent font-black">${info.tracking_no}</p>
+                            </div>
+                            <button onclick="window.clearParcelTracking('${name}')" class="text-red-500 p-1.5 hover:bg-red-50 rounded-lg"><i class="fa-solid fa-trash"></i></button>
+                        </div>`;
+                });
+            }
+
+            // 8. รายการคำสั่งซื้อจากลูกค้า
+            const ordList = document.getElementById('admin-orders-list');
+            const ordCount = document.getElementById('admin-orders-count');
+            if (ordCount) ordCount.textContent = `${window.shopOrders.length} รายการ`;
+            if (ordList) {
+                ordList.innerHTML = '';
+                if (window.shopOrders.length === 0) {
+                    ordList.innerHTML = `<p class="text-center text-cherie-gray text-[12px] py-6">ยังไม่มีคำสั่งซื้อเข้ามาค่ะ</p>`;
+                } else {
+                    window.shopOrders.forEach(o => {
+                        const itemsTxt = (o.items || []).map(i => `${i.name} (${i.option_summary}) x${i.qty}`).join(', ');
+                        const slipBtn = o.slip_url ? `<button onclick="window.viewFullImage('${o.slip_url}')" class="bg-blue-50 text-blue-600 border border-blue-200 px-2.5 py-1 rounded-lg text-[10px] font-bold"><i class="fa-solid fa-image"></i> ดูสลิป</button>` : '';
+                        ordList.innerHTML += `
+                            <div class="bg-cherie-appBg p-3.5 rounded-[16px] border border-cherie-pastel space-y-2 text-[12px]">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-black text-cherie-accent">${o.order_code || 'ORDER'}</span>
+                                    <span class="text-[10px] bg-white px-2 py-0.5 rounded-full border border-cherie-pastel font-bold">${o.shipping_label || ''}</span>
+                                </div>
+                                <div class="text-[11px] space-y-0.5">
+                                    <p><b>ผู้รับ:</b> ${o.customer_name} (${o.phone || '-'})</p>
+                                    <p><b>ที่อยู่:</b> ${o.address || '-'}</p>
+                                    <p class="text-[#059440] font-bold"><i class="fa-brands fa-line"></i> LINE (ส่งวิธีติด): ${o.line_id || '-'} ${o.request_howto ? '(ขอวิธีติด)' : ''}</p>
+                                    <p class="text-cherie-dark pt-1"><b>สินค้า:</b> ${itemsTxt}</p>
+                                </div>
+                                <div class="flex justify-between items-center pt-2 border-t border-cherie-pastel">
+                                    <span class="font-black text-emerald-700 text-[13px]">ยอดโอน: ฿${Number(o.pay_now || 0).toLocaleString()}</span>
+                                    <div class="flex items-center gap-1.5">
+                                        ${slipBtn}
+                                        <button onclick="document.getElementById('admin-parcel-cus-name').value='${o.customer_name}'; document.getElementById('admin-parcel-number').focus();" class="bg-cherie-pink text-cherie-dark border border-cherie-pastel px-2.5 py-1 rounded-lg text-[10px] font-bold">+ ใส่เลขพัสดุ</button>
+                                        <button onclick="window.dbDeleteReview('${o.db_id}')" class="text-red-500 p-1.5 hover:bg-red-50 rounded-lg"><i class="fa-solid fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            </div>`;
+                    });
+                }
+            }
         };
 
-        // บันทึกตั้งค่าร้านค้า (รวมถึงอัปโหลดไฟล์เพลง .mp3 ขึ้น Supabase Storage)
+        // บันทึกเลขพัสดุให้ลูกค้าเช็คหน้าเว็บ
+        window.saveParcelTrackingToCloud = async () => {
+            const name = document.getElementById('admin-parcel-cus-name').value.trim();
+            const carrier = document.getElementById('admin-parcel-carrier').value.trim() || 'ขนส่งมาตรฐาน';
+            const trackingNo = document.getElementById('admin-parcel-number').value.trim();
+            if (!name || !trackingNo) return window.showToast("⚠️", "กรุณากรอกชื่อลูกค้าและเลขพัสดุค่ะ");
+
+            const currentPts = window.shopData.loyalty[name]?.points || 0;
+            const currentLine = window.shopData.loyalty[name]?.line_id || '';
+            const metaStr = JSON.stringify({ lineId: currentLine, carrier, trackingNo });
+
+            const { error } = await sb.from('loyalty_points').upsert({
+                customer_name: name,
+                points: currentPts,
+                line_id: metaStr,
+                updated_at: new Date().toISOString()
+            });
+            if (!error) {
+                document.getElementById('admin-parcel-cus-name').value = '';
+                document.getElementById('admin-parcel-number').value = '';
+                window.showToast("🚚", "บันทึกเลขพัสดุเรียบร้อยแล้วค่ะ");
+                await loadAllShopData();
+            }
+        };
+
+        window.clearParcelTracking = async (name) => {
+            const currentPts = window.shopData.loyalty[name]?.points || 0;
+            const currentLine = window.shopData.loyalty[name]?.line_id || '';
+            const metaStr = JSON.stringify({ lineId: currentLine, carrier: '', trackingNo: '' });
+            const { error } = await sb.from('loyalty_points').update({
+                points: currentPts,
+                line_id: metaStr,
+                updated_at: new Date().toISOString()
+            }).eq('customer_name', name);
+            if (!error) {
+                window.showToast("🗑️", "ลบเลขพัสดุแล้ว");
+                await loadAllShopData();
+            }
+        };
+
+        // จัดการเพิ่ม/ลบสีและภาพสีของสินค้าในฟอร์มแอดมิน
+        window.addTempColorOption = async (mode) => {
+            const nameInput = document.getElementById(`${mode}-color-name`);
+            const fileInput = document.getElementById(`${mode}-color-img-file`);
+            const btn = document.getElementById(`btn-temp-${mode}-color`);
+            const colorName = nameInput.value.trim();
+            if (!colorName) return window.showToast("⚠️", "กรุณาใส่ชื่อสีค่ะ");
+
+            const origTxt = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> กำลังอัปโหลดภาพสี...';
+            btn.disabled = true;
+
+            try {
+                let colorImgUrl = '';
+                if (fileInput && fileInput.files.length > 0) {
+                    colorImgUrl = await uploadMediaToSupabase(fileInput.files[0], 'products');
+                }
+                const targetArr = mode === 'edit' ? tempEditColors : tempAddColors;
+                targetArr.push({ name: colorName, image_url: colorImgUrl });
+                nameInput.value = '';
+                if (fileInput) fileInput.value = '';
+                renderTempColorPreview(mode);
+            } catch (e) {
+                console.error(e);
+                window.showToast("⚠️", "อัปโหลดภาพสีไม่สำเร็จ");
+            } finally {
+                btn.innerHTML = origTxt;
+                btn.disabled = false;
+            }
+        };
+
+        function renderTempColorPreview(mode) {
+            const cont = document.getElementById(`${mode}-prod-colors-preview`);
+            if (!cont) return;
+            const targetArr = mode === 'edit' ? tempEditColors : tempAddColors;
+            cont.innerHTML = '';
+            targetArr.forEach((c, idx) => {
+                const imgHtml = c.image_url ? `<img src="${c.image_url}" class="w-6 h-6 rounded object-cover">` : `<span>🎨</span>`;
+                cont.innerHTML += `
+                    <div class="bg-white border border-cherie-pastel px-2.5 py-1 rounded-full flex items-center gap-1.5 text-[11px] font-bold">
+                        ${imgHtml}
+                        <span>${c.name}</span>
+                        <button type="button" onclick="window.removeTempColorOption('${mode}', ${idx})" class="text-red-500 ml-1"><i class="fa-solid fa-xmark"></i></button>
+                    </div>`;
+            });
+        }
+
+        window.removeTempColorOption = (mode, idx) => {
+            const targetArr = mode === 'edit' ? tempEditColors : tempAddColors;
+            targetArr.splice(idx, 1);
+            renderTempColorPreview(mode);
+        };
+
+        // บันทึกตั้งค่าร้านค้า (รวมถึงอัปโหลดไฟล์เพลง .mp3 และข้อมูลบัญชีธนาคาร/QR)
         window.saveShopInfoToCloud = async () => {
             const btn = document.getElementById('btn-save-shop');
             const origText = btn.innerHTML;
@@ -1649,6 +2572,14 @@
                     document.getElementById('admin-shop-bgm').value = bgmUrl;
                 }
 
+                const currentTheme = { ...(window.shopData.info.theme || DEFAULT_LUXURY_THEME) };
+                currentTheme.bankName = document.getElementById('admin-shop-bank-name').value.trim();
+                currentTheme.bankAccount = document.getElementById('admin-shop-bank-acc').value.trim();
+                const qrFileInput = document.getElementById('admin-shop-qr-file');
+                if (qrFileInput && qrFileInput.files.length > 0) {
+                    currentTheme.qrCodeUrl = await uploadMediaToSupabase(qrFileInput.files[0], 'shop');
+                }
+
                 const payload = {
                     id: 'main',
                     is_open: document.getElementById('admin-shop-status-toggle').checked,
@@ -1659,6 +2590,7 @@
                     contact_line_1: document.getElementById('admin-shop-line1').value.trim(),
                     contact_line_2: document.getElementById('admin-shop-line2').value.trim(),
                     bgm_url: bgmUrl,
+                    theme: currentTheme,
                     updated_at: new Date().toISOString()
                 };
 
@@ -1667,7 +2599,8 @@
 
                 if (logoInput) logoInput.value = '';
                 if (bgmFileInput) bgmFileInput.value = '';
-                window.showToast("✨", "บันทึกการตั้งค่าร้านและเพลงเรียบร้อยค่ะ");
+                if (qrFileInput) qrFileInput.value = '';
+                window.showToast("✨", "บันทึกการตั้งค่าร้านเรียบร้อยค่ะ");
                 await loadAllShopData();
             } catch (err) {
                 console.error(err);
@@ -1692,7 +2625,9 @@
         };
 
         window.saveThemeToCloud = async () => {
+            const currentTheme = { ...(window.shopData.info.theme || DEFAULT_LUXURY_THEME) };
             const theme = {
+                ...currentTheme,
                 font: document.getElementById('admin-theme-font').value,
                 bg: document.getElementById('color-bg').value,
                 pastel: document.getElementById('color-pastel').value,
@@ -1706,7 +2641,8 @@
                 const { error } = await sb.from('shop_settings').update({ theme, updated_at: new Date().toISOString() }).eq('id', 'main');
                 if (error) throw error;
                 window.applyTheme(theme);
-                window.showToast("🎨", "บันทึกโทนสีและฟอนต์เรียบร้อยค่ะ");
+                window.showToast("🎨", "บันทึกธีมสีและฟอนต์เรียบร้อยค่ะ");
+                await loadAllShopData();
             } catch (err) {
                 console.error(err);
                 window.showToast("⚠️", "บันทึกธีมไม่สำเร็จ");
@@ -1714,19 +2650,23 @@
         };
 
         window.resetLuxuryGoldTheme = async () => {
-            try {
-                const { error } = await sb.from('shop_settings').update({ theme: DEFAULT_LUXURY_THEME, updated_at: new Date().toISOString() }).eq('id', 'main');
-                if (error) throw error;
-                window.shopData.info.theme = { ...DEFAULT_LUXURY_THEME };
-                window.applyTheme(DEFAULT_LUXURY_THEME);
-                updateAdminForms();
+            const currentTheme = { ...(window.shopData.info.theme || {}) };
+            const resetTheme = {
+                ...currentTheme,
+                ...DEFAULT_LUXURY_THEME
+            };
+            window.applyTheme(resetTheme);
+            const { error } = await sb.from('shop_settings').update({
+                theme: resetTheme,
+                updated_at: new Date().toISOString()
+            }).eq('id', 'main');
+            if (!error) {
+                await loadAllShopData();
                 window.showToast("✨", "รีเซ็ตเป็นโทนสีทอง-ขาว เรียบหรูแล้วค่ะ");
-            } catch (err) {
-                console.error(err);
             }
         };
 
-        // เพิ่ม/แก้ไข/ลบสินค้า
+        // เพิ่ม/แก้ไข/ลบสินค้า (พร้อมชนิดยาง สี และภาพสี)
         window.addProductToCloud = async () => {
             const name = document.getElementById('add-prod-name').value.trim();
             const price = parseFloat(document.getElementById('add-prod-price').value);
@@ -1744,10 +2684,18 @@
                     imageUrl = await uploadMediaToSupabase(fileInput.files[0], 'products');
                 }
 
+                const bandTypesRaw = document.getElementById('add-prod-band-types').value;
+                const bandTypes = bandTypesRaw.split(',').map(s => s.trim()).filter(Boolean);
+                const packedDesc = packProductDescription(
+                    document.getElementById('add-prod-desc').value.trim(),
+                    bandTypes,
+                    tempAddColors
+                );
+
                 const { error } = await sb.from('products').insert([{
                     name,
                     price,
-                    description: document.getElementById('add-prod-desc').value.trim(),
+                    description: packedDesc,
                     category_id: document.getElementById('add-prod-category').value || 'ทั่วไป',
                     image_url: imageUrl,
                     tag: document.getElementById('add-prod-tag').value.trim() || null,
@@ -1760,6 +2708,9 @@
                 document.getElementById('add-prod-price').value = '';
                 document.getElementById('add-prod-desc').value = '';
                 document.getElementById('add-prod-tag').value = '';
+                document.getElementById('add-prod-band-types').value = '';
+                tempAddColors = [];
+                renderTempColorPreview('add');
                 if (fileInput) fileInput.value = '';
                 window.showToast("✨", "เพิ่มสินค้าเรียบร้อยค่ะ");
                 await loadAllShopData();
@@ -1775,11 +2726,15 @@
         window.openEditProductModal = (pid) => {
             const p = window.shopData.products.find(x => x.id === pid);
             if (!p) return;
+            const meta = parseProductMeta(p);
             document.getElementById('edit-prod-id').value = p.id;
             document.getElementById('edit-prod-name').value = p.name || '';
             document.getElementById('edit-prod-price').value = p.price || 0;
             document.getElementById('edit-prod-tag').value = p.tag || '';
-            document.getElementById('edit-prod-desc').value = p.description || '';
+            document.getElementById('edit-prod-desc').value = meta.cleanDesc || '';
+            document.getElementById('edit-prod-band-types').value = meta.bandTypes.join(', ');
+            tempEditColors = [...meta.colors];
+            renderTempColorPreview('edit');
             document.getElementById('edit-prod-category').value = p.category_id || '';
             document.getElementById('edit-prod-recom').checked = !!p.is_recommended;
             document.getElementById('edit-prod-image-file').value = '';
@@ -1817,10 +2772,18 @@
                     imageUrl = await uploadMediaToSupabase(fileInput.files[0], 'products');
                 }
 
+                const bandTypesRaw = document.getElementById('edit-prod-band-types').value;
+                const bandTypes = bandTypesRaw.split(',').map(s => s.trim()).filter(Boolean);
+                const packedDesc = packProductDescription(
+                    document.getElementById('edit-prod-desc').value.trim(),
+                    bandTypes,
+                    tempEditColors
+                );
+
                 const { error } = await sb.from('products').update({
                     name,
                     price,
-                    description: document.getElementById('edit-prod-desc').value.trim(),
+                    description: packedDesc,
                     category_id: document.getElementById('edit-prod-category').value,
                     tag: document.getElementById('edit-prod-tag').value.trim() || null,
                     image_url: imageUrl,
@@ -2125,6 +3088,15 @@
 
         // เริ่มต้นทำงานเมื่อเปิดหน้าเว็บ
         document.addEventListener('DOMContentLoaded', async () => {
+            // Failsafe ปิดหน้าโหลดอัตโนมัติไม่ให้ค้างทุกกรณี
+            setTimeout(() => {
+                const loader = document.getElementById('cloud-loader');
+                if (loader && loader.style.display !== 'none') {
+                    loader.style.opacity = '0';
+                    setTimeout(() => { loader.style.display = 'none'; }, 400);
+                }
+            }, 2500);
+
             await loadAllShopData();
             await verifyAdminSession();
             setupRealtimeSubscriptions();
